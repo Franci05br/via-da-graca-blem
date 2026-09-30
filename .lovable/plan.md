@@ -4,10 +4,12 @@
 Criar a página inicial completa como uma revista-vitrine sacra e elegante, sem carrinho ou pagamento online. A navegação apresenta as peças artesanais e conduz cada consulta ao WhatsApp.
 
 ## Identidade e logotipo
-- Redesenhar fielmente o logotipo visto na referência ampliada: silhueta de Nossa Senhora, cruz, estrela, ramos laterais, “VIA DA GRAÇA” e “FEITO COM FÉ”.
-- Produzir uma versão vetorial limpa, transparente e adaptável, com traços verde profundo e dourado devocional, preservando as proporções e a identidade original.
-- Preparar uma composição completa para cabeçalho/rodapé e uma versão compacta legível em telas pequenas.
-- Usar o logotipo redesenhado no site; o print do Instagram servirá somente como referência.
+- Reinterpretar o logotipo visto na referência ampliada, preservando sua essência: silhueta sutil de Nossa Senhora, cruz, estrela, ramos laterais, “VIA DA GRAÇA” e “FEITO COM FÉ”.
+- Excluir totalmente o círculo e qualquer moldura do perfil do Instagram; esse elemento não pertence à marca.
+- Criar o logotipo diretamente como vetor SVG limpo, com fundo 100% transparente, traços nítidos em verde profundo e dourado devocional e excelente integração ao fundo claro do site.
+- Priorizar alta visibilidade e leitura no celular, com liberdade para simplificar detalhes, ajustar espessuras e modernizar a tipografia sem descaracterizar a identidade.
+- Preparar uma composição completa para cabeçalho/rodapé e uma versão compacta para espaços pequenos.
+- Usar o novo SVG no site; o print do Instagram servirá somente como referência.
 
 ## Direção visual
 - Paleta extraída das referências: marfim luminoso, dourado suave, verde profundo, azul mariano pontual e tons naturais da corda.
