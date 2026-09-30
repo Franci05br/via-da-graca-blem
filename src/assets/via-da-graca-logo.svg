@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 190" role="img" aria-labelledby="title desc">
+  <title id="title">Via da Graça</title>
+  <desc id="desc">Nossa Senhora sob uma estrela e uma cruz, entre ramos delicados</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#24483d" stroke-width="3.6">
+      <path d="M107 113C77 100 62 70 73 39"/>
+      <path d="M79 93l-18-3 9 14M72 75l-17-7 5 16M72 57l-12-12 1 18M78 42l-5-15-5 14"/>
+      <path d="M313 113c30-13 45-43 34-74"/>
+      <path d="M341 93l18-3-9 14M348 75l17-7-5 16M348 57l12-12-1 18M342 42l5-15 5 14"/>
+    </g>
+    <g stroke="#b58a37" stroke-width="5">
+      <path d="M210 52c-24 13-37 31-35 53 2 17 18 28 34 10 13-15-4-29-15-13-7 10 7 28 26 31 27 4 43-16 36-37-7-20-26-32-46-44Z"/>
+      <path d="M210 51V32M201 38h18"/>
+    </g>
+    <g stroke="#b58a37" stroke-width="2.6">
+      <path d="M210 8v12M204 14h12M205.5 9.5l9 9M214.5 9.5l-9 9"/>
+    </g>
+  </g>
+  <text x="210" y="158" text-anchor="middle" fill="#24483d" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700" letter-spacing="3">VIA DA GRAÇA</text>
+  <text x="210" y="178" text-anchor="middle" fill="#9b732f" font-family="Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="4">FEITO COM FÉ</text>
+</svg>

@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep the showroom as a static, frontend-only catalogue with WhatsApp handoff; the approved scope excludes commerce and persistent inventory.
