@@ -1,167 +1,239 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowRight, Check, Heart, Instagram, Menu, MessageCircle, PackageCheck, Sparkles, X } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, Instagram, MessageCircle, Music2, MusicOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/via-da-graca-logo.svg";
-import basilica from "@/assets/basilica-nazare.jpg.asset.json";
-import corda from "@/assets/corda-cirio.jpg.asset.json";
-import fitas from "@/assets/fitas-cirio.webp.asset.json";
-import pulseiraFe from "@/assets/pulseira-fe.jpg.asset.json";
-import pulseiraNazare from "@/assets/pulseira-nazare.jpg.asset.json";
-import pulseiraInfantil from "@/assets/pulseira-infantil.jpg.asset.json";
-import conjuntoDevocional from "@/assets/conjunto-devocional.jpg.asset.json";
-import dezenasFe from "@/assets/dezenas-fe.jpg.asset.json";
-import tercosArtesanais from "@/assets/tercos-artesanais.jpg.asset.json";
-
-type Category = "Todos" | "Terços Artesanais" | "Pulseiras & Dezenas" | "Artigos de Oração";
+import corda from "@/assets/corda.png";
+import pulseiraFe from "@/assets/p-fe.jpg";
+import pulseiraNazinha from "@/assets/p-nazinha.jpg";
+import infantil from "@/assets/p-infantil.jpg";
+import dezenas from "@/assets/p-dezenas.jpg";
+import perola from "@/assets/p-terco-perola.jpg";
+import amarelo from "@/assets/p-terco-amarelo.jpg";
+import vermelho from "@/assets/p-terco-vermelho.jpg";
+import imagemGrande from "@/assets/p-imagem-grande.jpg";
+import imagemPequena from "@/assets/p-imagem-pequena.jpg";
 
 type Product = {
   name: string;
-  category: Exclude<Category, "Todos">;
-  image: string;
+  edition: string;
   description: string;
-  price: string;
+  details: string[];
+  images: string[];
 };
 
 const products: Product[] = [
-  { name: "Pulseira Fé", category: "Pulseiras & Dezenas", image: pulseiraFe.url, description: "Contas naturais e medalhas que celebram a história de amor entre Nossa Senhora de Nazaré e o povo paraense.", price: "R$ 64,00" },
-  { name: "Pulseira Nazinha", category: "Pulseiras & Dezenas", image: pulseiraNazare.url, description: "Composição artesanal em contas claras e vermelhas, metais em tom antigo e fitas delicadas.", price: "R$ 58,00" },
-  { name: "Dezeninha Infantil", category: "Pulseiras & Dezenas", image: pulseiraInfantil.url, description: "Uma lembrança de fé para acompanhar os pequenos, com contas alegres e crucifixo delicado.", price: "R$ 42,00" },
-  { name: "Dezenas de Fé", category: "Pulseiras & Dezenas", image: dezenasFe.url, description: "Terços compactos para usar como pulseira, com contas naturais, madeira e símbolos de devoção.", price: "R$ 48,00" },
-  { name: "Terços Artesanais", category: "Terços Artesanais", image: tercosArtesanais.url, description: "Feitos um a um em contas claras e amarelas, com medalhas e acabamento prateado.", price: "R$ 72,00" },
-  { name: "Conjunto Colo de Maria", category: "Artigos de Oração", image: conjuntoDevocional.url, description: "Composição devocional com terço, imagem de Nossa Senhora e apoio para momentos de oração.", price: "R$ 96,00" },
+  {
+    name: "Pulseira Fé",
+    edition: "Coleção Círio",
+    description: "Contas azul-marianas e símbolos delicados compõem uma peça para levar a devoção sempre por perto.",
+    details: ["Contas naturais", "Pingentes em metal envelhecido", "Acabamento ajustável"],
+    images: [pulseiraFe, pulseiraNazinha],
+  },
+  {
+    name: "Pulseira Nazinha",
+    edition: "Edição artesanal",
+    description: "Uma composição afetiva de contas claras e vermelhas, medalhas e fitas em tons suaves.",
+    details: ["Montagem manual", "Medalhas devocionais", "Pompom de fios coloridos"],
+    images: [pulseiraNazinha, pulseiraFe],
+  },
+  {
+    name: "Dezeninha Infantil",
+    edition: "Pequenos gestos de fé",
+    description: "Leve, alegre e delicada, foi pensada para acompanhar as crianças em seus primeiros caminhos de oração.",
+    details: ["Contas amarelas", "Pingentes leves", "Tamanho infantil"],
+    images: [infantil, amarelo],
+  },
+  {
+    name: "Dezenas de Fé",
+    edition: "Três variações",
+    description: "Terços compactos para usar no pulso, reunindo madeira, hematita e símbolos de proteção.",
+    details: ["Três combinações", "Contas de pedra ou madeira", "Crucifixos e medalhas"],
+    images: [dezenas, perola],
+  },
+  {
+    name: "Terços de Pulso",
+    edition: "Tríptico de cores",
+    description: "Três leituras de uma mesma delicadeza: pérola, amarelo e vermelho em composições luminosas.",
+    details: ["Contas facetadas", "Detalhes dourados", "Produção em pequena escala"],
+    images: [perola, amarelo, vermelho],
+  },
+  {
+    name: "Colo de Maria",
+    edition: "Composição devocional",
+    description: "Imagem artesanal acompanhada por terços delicados, criada para um recanto de oração íntimo e acolhedor.",
+    details: ["Imagem artesanal", "Terço coordenado", "Duas variações"],
+    images: [imagemGrande, imagemPequena],
+  },
 ];
 
-const categories: Category[] = ["Todos", "Terços Artesanais", "Pulseiras & Dezenas", "Artigos de Oração"];
-const whatsappNumber = "559100000000";
-
-function whatsappUrl(item?: string) {
-  const message = item
-    ? `Olá! Gostaria de consultar a peça ${item} da Via da Graça.`
+function whatsappUrl(name?: string) {
+  const message = name
+    ? `Olá! Gostaria de consultar a peça ${name} da Via da Graça.`
     : "Olá! Gostaria de conhecer as peças da Via da Graça.";
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/?text=${encodeURIComponent(message)}`;
 }
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Via da Graça | Terços e artigos de fé artesanais em Belém" },
-      { name: "description", content: "Showroom de terços, pulseiras e artigos devocionais feitos à mão em Belém, inspirados no Círio de Nazaré." },
-      { property: "og:title", content: "Via da Graça | Feito com fé" },
-      { property: "og:description", content: "Peças artesanais que celebram a devoção a Nossa Senhora de Nazaré e a fé do povo paraense." },
+      { title: "Via da Graça | Catálogo artesanal" },
+      { name: "description", content: "Catálogo interativo de terços, pulseiras e artigos devocionais artesanais da Via da Graça, em Belém." },
+      { property: "og:title", content: "Via da Graça | Catálogo artesanal" },
+      { property: "og:description", content: "Folheie a coleção de peças devocionais feitas à mão e consulte pelo WhatsApp." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: Index,
+  component: Catalog,
 });
 
-function BrandLogo({ className = "" }: { className?: string }) {
-  return <img src={logo} alt="Via da Graça — Feito com Fé" className={className} />;
+function BasilicaLineArt() {
+  return (
+    <svg className="basilica-line" viewBox="0 0 900 560" aria-hidden="true">
+      <g fill="none" stroke="currentColor" strokeWidth="1.25">
+        <path d="M142 470V190h92v280M666 470V190h92v280M173 190v-52h30v52M697 190v-52h30v52M187 138V92M712 138V92" />
+        <path d="M160 190c0-32 13-55 28-55s28 23 28 55M684 190c0-32 13-55 28-55s28 23 28 55" />
+        <path d="M234 470V248l216-120 216 120v222M270 265h360M305 470V290h290v180M365 470V322h170v148" />
+        <path d="M450 128V69M429 87h42M398 220h104M450 188c32 0 51 23 51 51H399c0-28 19-51 51-51Z" />
+        <path d="M116 470h668M101 488h698M278 290l-23 180M622 290l23 180M337 290l-11 180M563 290l11 180" />
+        <circle cx="188" cy="238" r="20" /><circle cx="712" cy="238" r="20" /><circle cx="450" cy="250" r="17" />
+      </g>
+    </svg>
+  );
 }
 
-function Index() {
-  const [category, setCategory] = useState<Category>("Todos");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const visibleProducts = category === "Todos" ? products : products.filter((product) => product.category === category);
+function RibbonDetails() {
+  return <div className="ribbons" aria-hidden="true"><i /><i /><i /><i /></div>;
+}
 
+function ProductPage({ product, number }: { product: Product; number: number }) {
+  const [selected, setSelected] = useState(0);
+  useEffect(() => setSelected(0), [product]);
   return (
-    <main className="overflow-x-hidden bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/95 backdrop-blur-md">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-          <a href="#inicio" aria-label="Via da Graça — início"><BrandLogo className="h-14 w-auto" /></a>
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
-            <a href="#colecao" className="nav-link">Coleção</a>
-            <a href="#como-funciona" className="nav-link">Como funciona</a>
-            <a href="#nossa-historia" className="nav-link">Nossa história</a>
-            <a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" className="nav-link">Instagram</a>
-          </nav>
-          <div className="hidden lg:block"><Button asChild><a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Falar com a artesã</a></Button></div>
-          <Button variant="ghost" className="size-11 px-0 lg:hidden" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X /> : <Menu />}</Button>
-        </div>
-        {menuOpen && (
-          <nav className="border-t border-border bg-background px-5 py-5 lg:hidden" aria-label="Navegação móvel">
-            <div className="flex flex-col gap-4">
-              {[['Coleção','#colecao'],['Como funciona','#como-funciona'],['Nossa história','#nossa-historia']].map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="nav-link py-2">{label}</a>)}
-              <Button asChild><a href={whatsappUrl()} target="_blank" rel="noreferrer">Falar com a artesã</a></Button>
-            </div>
-          </nav>
-        )}
-      </header>
-
-      <section id="inicio" className="relative flex min-h-[92svh] items-end pt-20">
-        <img src={basilica.url} alt="Fachada da Basílica Santuário de Nossa Senhora de Nazaré, em Belém" className="absolute inset-0 h-full w-full object-cover object-[center_40%]" />
-        <div className="hero-overlay absolute inset-0" />
-        <div className="relative mx-auto w-full max-w-7xl px-5 pb-14 pt-28 lg:px-8 lg:pb-20">
-          <div className="max-w-3xl text-primary-foreground">
-            <p className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]"><span className="h-px w-10 bg-current" />Belém do Pará · Círio 2026</p>
-            <h1 className="font-display text-5xl leading-[0.98] sm:text-6xl lg:text-8xl">Via da Graça</h1>
-            <p className="mt-6 max-w-2xl font-display text-2xl leading-tight sm:text-3xl">A história de amor entre o povo paraense e Nossa Senhora.</p>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-primary-foreground/85">Peças feitas à mão, uma a uma, para transformar fé, carinho e oração em lembranças que atravessam gerações.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90"><a href="#colecao">Explorar coleção <ArrowRight size={16} /></a></Button>
-              <Button asChild variant="outline" className="border-primary-foreground/50 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"><a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Contato no WhatsApp</a></Button>
-            </div>
-            <p className="mt-4 text-xs text-primary-foreground/70">Contato de demonstração — número e valores provisórios.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-accent/30 bg-accent px-5 py-4 text-accent-foreground">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-2 text-center text-xs font-semibold uppercase tracking-[0.14em] sm:flex-row sm:gap-5"><span>Atendimento 100% humanizado & seguro</span><Sparkles size={14} /><span>Peças exclusivas em Belém-PA</span></div>
-      </section>
-
-      <section id="colecao" className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
-        <div className="mb-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div><p className="eyebrow">Coleção feita com fé</p><h2 className="section-title">Pequenos símbolos.<br />Grandes histórias.</h2></div>
-          <p className="max-w-md text-sm leading-relaxed text-muted-foreground">Cada peça é escolhida e montada com cuidado, inspirada na fé que move Belém e na presença amorosa de Nossa Senhora de Nazaré.</p>
-        </div>
-        <div className="mb-9 flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Filtrar coleção">
-          {categories.map((item) => <Button key={item} variant={category === item ? "primary" : "outline"} onClick={() => setCategory(item)} aria-pressed={category === item} className="shrink-0 normal-case tracking-normal">{item}</Button>)}
-        </div>
-        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleProducts.map((product, index) => (
-            <article key={product.name} className="group">
-              <div className={`overflow-hidden bg-muted ${index % 3 === 1 ? "aspect-[4/5] lg:mt-10" : "aspect-[4/5]"}`}>
-                <img src={product.image} alt={product.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
-              </div>
-              <div className="pt-5">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-primary/70">{product.category}</p>
-                <div className="mt-2 flex items-start justify-between gap-4"><h3 className="font-display text-2xl">{product.name}</h3><p className="shrink-0 font-semibold text-primary">{product.price}<span className="block text-right text-[9px] font-normal uppercase text-muted-foreground">provisório</span></p></div>
-                <p className="mt-3 min-h-16 text-sm leading-relaxed text-muted-foreground">{product.description}</p>
-                <Button asChild variant="ghost" className="mt-3 -ml-5 text-primary"><a href={whatsappUrl(product.name)} target="_blank" rel="noreferrer">Consultar no WhatsApp <ArrowRight size={15} /></a></Button>
-              </div>
-            </article>
+    <article className="product-spread">
+      <div className="photo-page">
+        <div className="photo-frame"><img src={product.images[selected]} alt={`${product.name} — vista ${selected + 1}`} /></div>
+        <div className="thumbnail-row" aria-label={`Outras vistas de ${product.name}`}>
+          {product.images.map((image, index) => (
+            <button key={image} type="button" onClick={() => setSelected(index)} className={selected === index ? "thumb active" : "thumb"} aria-label={`Ver imagem ${index + 1}`} aria-pressed={selected === index}>
+              <img src={image} alt="" />
+            </button>
           ))}
         </div>
-      </section>
+      </div>
+      <div className="detail-page">
+        <span className="page-number">{String(number).padStart(2, "0")}</span>
+        <p className="catalog-kicker">{product.edition}</p>
+        <h2>{product.name}</h2>
+        <div className="gold-rule" />
+        <p className="product-copy">{product.description}</p>
+        <ul>{product.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>
+        <div className="price-block"><span>Valor</span><strong>Sob consulta</strong></div>
+        <Button asChild className="catalog-cta"><a href={whatsappUrl(product.name)} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Pedir no WhatsApp</a></Button>
+        <p className="contact-note">A mensagem será preparada; o número oficial ainda será vinculado.</p>
+      </div>
+    </article>
+  );
+}
 
-      <section className="bg-primary text-primary-foreground">
-        <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
-          <div className="relative min-h-[440px] lg:min-h-[650px]"><img src={corda.url} alt="Mãos unidas segurando a corda do Círio de Nazaré" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-primary/20" /></div>
-          <div id="como-funciona" className="flex flex-col justify-center px-6 py-16 lg:px-16 lg:py-24">
-            <p className="eyebrow text-accent">Da escolha ao encontro</p><h2 className="section-title text-primary-foreground">Um atendimento próximo, como deve ser.</h2>
-            <ol className="mt-10 space-y-8">
-              {[
-                ["01", "Escolha com calma", "Navegue pela coleção e encontre as peças que falam ao seu coração."],
-                ["02", "Converse com a artesã", "Clique em consultar e conte pelo WhatsApp quais peças você deseja."],
-                ["03", "Receba em Belém", "Combinamos entrega ou retirada e o pagamento acontece no recebimento."],
-              ].map(([number, title, text]) => <li key={number} className="grid grid-cols-[3rem_1fr] gap-4 border-t border-primary-foreground/20 pt-6"><span className="font-display text-2xl text-accent">{number}</span><div><h3 className="font-display text-xl">{title}</h3><p className="mt-2 text-sm leading-relaxed text-primary-foreground/70">{text}</p></div></li>)}
-            </ol>
-          </div>
+function Cover() {
+  return (
+    <section className="cover-page">
+      <BasilicaLineArt />
+      <RibbonDetails />
+      <img src={corda} alt="" className="cover-rope" width={1536} height={768} />
+      <div className="cover-content">
+        <p className="cover-edition">Catálogo artesanal · Belém do Pará</p>
+        <img src={logo} alt="Via da Graça — Feito com Fé" className="cover-logo" />
+        <p className="cover-tagline">Pequenos símbolos.<br />Grandes histórias.</p>
+        <div className="cover-links">
+          <a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer"><Instagram size={16} /> @viadagraca._</a>
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Consultar coleção</a>
         </div>
-      </section>
+      </div>
+      <p className="cover-instruction">Arraste ou use as setas para folhear</p>
+    </section>
+  );
+}
 
-      <section id="nossa-historia" className="relative overflow-hidden py-20 lg:py-28">
-        <img src={fitas.url} alt="Fitinhas coloridas do Círio de Nazaré" className="absolute inset-y-0 right-0 hidden h-full w-[38%] object-cover lg:block" />
-        <div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="max-w-2xl lg:w-[58%]"><p className="eyebrow">Nossa história & devoção</p><h2 className="section-title">Quando a fé encontra o fazer das mãos.</h2><div className="mt-7 space-y-5 text-base leading-8 text-muted-foreground"><p>A Via da Graça nasceu do desejo de prestar uma homenagem a Nossa Nazinha e à história que une Maria de Nazaré ao povo do Pará.</p><p>Cada peça carrega um gesto de gratidão: contas escolhidas com cuidado, medalhas que guardam memórias e detalhes feitos um a um. É uma forma delicada de manter a oração por perto e partilhar o amor que atravessa o Círio.</p></div><div className="mt-8 flex items-center gap-3 text-primary"><Heart size={18} /><span className="text-sm font-semibold">Feito artesanalmente em Belém, com fé e carinho.</span></div></div></div>
-      </section>
+function BackCover() {
+  return (
+    <section className="back-cover">
+      <BasilicaLineArt />
+      <img src={logo} alt="Via da Graça — Feito com Fé" />
+      <p>Feito à mão, com fé e delicadeza.</p>
+      <Button asChild><a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Falar sobre uma peça</a></Button>
+      <a className="back-instagram" href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer"><Instagram size={16} /> @viadagraca._</a>
+    </section>
+  );
+}
 
-      <section className="border-y border-border bg-secondary py-16"><div className="mx-auto max-w-4xl px-5 text-center"><BrandLogo className="mx-auto h-28 w-auto" /><p className="mx-auto mt-5 max-w-xl font-display text-2xl">Quer encontrar uma peça especial para você ou para presentear?</p><Button asChild className="mt-7"><a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Conversar com a artesã</a></Button><p className="mt-3 text-xs text-muted-foreground">Número fictício nesta demonstração.</p></div></section>
+function Catalog() {
+  const totalPages = products.length + 2;
+  const [page, setPage] = useState(0);
+  const [direction, setDirection] = useState<"next" | "prev">("next");
+  const [soundOn, setSoundOn] = useState(true);
+  const touchStart = useRef<number | null>(null);
 
-      <footer className="bg-primary px-5 py-12 text-primary-foreground lg:px-8"><div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.2fr_1fr_1fr]"><div><BrandLogo className="h-24 w-auto brightness-0 invert" /><p className="mt-4 max-w-sm text-sm leading-relaxed text-primary-foreground/65">Terços, pulseiras e artigos devocionais feitos artesanalmente em Belém do Pará.</p></div><div><p className="footer-title">Visite</p><div className="mt-4 flex flex-col gap-3 text-sm"><a href="#colecao">Coleção</a><a href="#como-funciona">Como funciona</a><a href="#nossa-historia">Nossa história</a></div></div><div><p className="footer-title">Acompanhe</p><a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm"><Instagram size={18} /> @viadagraca._</a><p className="mt-5 flex items-center gap-2 text-xs text-primary-foreground/60"><Check size={14} /> Atendimento em Belém-PA</p></div></div><div className="mx-auto mt-10 flex max-w-7xl flex-col justify-between gap-3 border-t border-primary-foreground/15 pt-6 text-xs text-primary-foreground/50 sm:flex-row"><span>© 2026 Via da Graça. Feito com fé.</span><span>Preços e contato exibidos são provisórios.</span></div></footer>
+  const paperSound = useCallback(() => {
+    if (!soundOn || typeof window === "undefined") return;
+    const AudioContextClass = window.AudioContext ?? (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!AudioContextClass) return;
+    const context = new AudioContextClass();
+    const buffer = context.createBuffer(1, Math.floor(context.sampleRate * 0.12), context.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < data.length; i += 1) data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
+    const source = context.createBufferSource();
+    const filter = context.createBiquadFilter();
+    const gain = context.createGain();
+    filter.type = "bandpass"; filter.frequency.value = 1150; gain.gain.value = 0.035;
+    source.buffer = buffer; source.connect(filter); filter.connect(gain); gain.connect(context.destination); source.start();
+    source.onended = () => void context.close();
+  }, [soundOn]);
 
-      <a href={whatsappUrl()} target="_blank" rel="noreferrer" aria-label="Consultar pelo WhatsApp — contato de demonstração" className="fixed bottom-5 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground shadow-xl transition-transform hover:scale-105"><MessageCircle size={25} /></a>
+  const goTo = useCallback((next: number) => {
+    const bounded = Math.max(0, Math.min(totalPages - 1, next));
+    if (bounded === page) return;
+    setDirection(bounded > page ? "next" : "prev"); setPage(bounded); paperSound();
+  }, [page, paperSound, totalPages]);
+
+  useEffect(() => {
+    const url = new URL(window.location.href); url.searchParams.set("page", String(page + 1)); window.history.replaceState({}, "", url);
+    document.title = `${page + 1}/${totalPages} — Via da Graça`;
+  }, [page, totalPages]);
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight" || event.key === " ") goTo(page + 1);
+      if (event.key === "ArrowLeft") goTo(page - 1);
+    };
+    window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey);
+  }, [goTo, page]);
+
+  return (
+    <main className="catalog-shell">
+      <header className="catalog-bar">
+        <img src={logo} alt="Via da Graça" />
+        <div className="bar-actions">
+          <span>{String(page + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span>
+          <Button variant="ghost" size="icon" onClick={() => setSoundOn((value) => !value)} aria-label={soundOn ? "Desativar som de página" : "Ativar som de página"}>{soundOn ? <Music2 size={18} /> : <MusicOff size={18} />}</Button>
+        </div>
+      </header>
+
+      <div className="magazine-stage" onTouchStart={(event) => { touchStart.current = event.touches[0]?.clientX ?? null; }} onTouchEnd={(event) => { const start = touchStart.current; const end = event.changedTouches[0]?.clientX; if (start !== null && end !== undefined && Math.abs(end - start) > 45) goTo(end < start ? page + 1 : page - 1); touchStart.current = null; }}>
+        <div key={page} className={`magazine-page flip-${direction}`}>
+          {page === 0 ? <Cover /> : page === totalPages - 1 ? <BackCover /> : <ProductPage product={products[page - 1]} number={page} />}
+        </div>
+        <button className="page-arrow page-arrow-left" type="button" onClick={() => goTo(page - 1)} disabled={page === 0} aria-label="Página anterior"><ArrowLeft /></button>
+        <button className="page-arrow page-arrow-right" type="button" onClick={() => goTo(page + 1)} disabled={page === totalPages - 1} aria-label="Próxima página"><ArrowRight /></button>
+      </div>
+
+      <nav className="page-dots" aria-label="Páginas do catálogo">
+        {Array.from({ length: totalPages }, (_, index) => <button key={index} type="button" className={index === page ? "active" : ""} onClick={() => goTo(index)} aria-label={`Ir para página ${index + 1}`} aria-current={index === page ? "page" : undefined} />)}
+      </nav>
+
+      <a className="fixed-instagram" href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" aria-label="Instagram da Via da Graça"><Instagram size={20} /><span>@viadagraca._</span></a>
     </main>
   );
 }
