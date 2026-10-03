@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Instagram, MessageCircle, Volume2, VolumeX } from "lucide-react";
+import { ArrowLeft, ArrowRight, Instagram, MessageCircle, Volume2, VolumeX, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/via-da-graca-logo.svg";
 import corda from "@/assets/corda.png";
@@ -103,9 +103,50 @@ function BasilicaLineArt() {
   );
 }
 
+const ribbonColors = ["var(--ribbon-red)", "var(--ribbon-yellow)", "var(--ribbon-green)", "var(--ribbon-blue)", "var(--ribbon-white)"];
+
 function RibbonDetails() {
-  return <div className="ribbons" aria-hidden="true"><i /><i /><i /><i /></div>;
+  return (
+    <div className="ribbons" aria-hidden="true">
+      {ribbonColors.map((color, index) => (
+        <svg key={color} className="satin-ribbon" viewBox="0 0 44 420" style={{ animationDelay: `${index * -1.3}s` }}>
+          <defs>
+            <linearGradient id={`sheen-${index}`} x1="0" x2="1">
+              <stop offset="0" stopColor="#000" stopOpacity=".18" />
+              <stop offset=".45" stopColor="#fff" stopOpacity=".45" />
+              <stop offset="1" stopColor="#000" stopOpacity=".12" />
+            </linearGradient>
+          </defs>
+          <path d="M8 0h28c-6 90 8 170 0 260s6 120 0 150l-14-14-14 14c-6-40 6-80 0-150S2 90 8 0Z" fill={color} />
+          <path d="M8 0h28c-6 90 8 170 0 260s6 120 0 150l-14-14-14 14c-6-40 6-80 0-150S2 90 8 0Z" fill={`url(#sheen-${index})`} />
+          <text x="22" y="40" transform="rotate(90 22 40)" className="ribbon-text">Lembrança do Círio de N. Sra. de Nazaré</text>
+        </svg>
+      ))}
+    </div>
+  );
 }
+
+function OurLadyLineArt() {
+  return (
+    <svg className="our-lady" viewBox="0 0 200 320" aria-hidden="true">
+      <g fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+        <path d="M100 20l6 10 12-6-4 12 12 2-10 8" /><path d="M100 20l-6 10-12-6 4 12-12 2 10 8" />
+        <circle cx="100" cy="62" r="13" /><circle cx="100" cy="62" r="24" strokeDasharray="2 5" />
+        <path d="M100 46c-26 4-38 30-40 70-4 70-26 130-30 180h140c-4-50-26-110-30-180-2-40-14-66-40-70" />
+        <path d="M86 98c6 10 22 10 28 0M78 130c14 18 30 18 44 0M100 112v178M70 200c20 12 40 12 60 0" />
+        <circle cx="100" cy="148" r="8" /><circle cx="100" cy="148" r="4" />
+        <path d="M24 300h152M40 312h120" />
+      </g>
+    </svg>
+  );
+}
+
+const categories = [
+  { label: "Pulseiras de Fé", page: 1 },
+  { label: "Infantil", page: 3 },
+  { label: "Terços & Dezenas", page: 4 },
+  { label: "Imagens Devocionais", page: 6 },
+];
 
 function ProductPage({ product, number }: { product: Product; number: number }) {
   const [selected, setSelected] = useState(0);
@@ -175,6 +216,8 @@ function Catalog() {
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [soundOn, setSoundOn] = useState(true);
   const touchStart = useRef<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   const paperSound = useCallback(() => {
     if (!soundOn || typeof window === "undefined") return;
@@ -213,13 +256,38 @@ function Catalog() {
 
   return (
     <main className="catalog-shell">
+      <OurLadyLineArt />
       <header className="catalog-bar">
         <img src={logo} alt="Via da Graça" />
+        <nav className="bar-menu" aria-label="Menu">
+          <div className="menu-item">
+            <button type="button" onClick={() => setMenuOpen((v) => !v)} aria-expanded={menuOpen}>Categorias</button>
+            {menuOpen && (
+              <div className="menu-dropdown">
+                {categories.map((c) => <button key={c.label} type="button" onClick={() => { goTo(c.page); setMenuOpen(false); }}>{c.label}</button>)}
+              </div>
+            )}
+          </div>
+          <button type="button" onClick={() => { setAboutOpen(true); setMenuOpen(false); }}>Sobre</button>
+          <a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={16} /><span className="hide-sm">@viadagraca._</span></a>
+        </nav>
         <div className="bar-actions">
-          <span>{String(page + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span>
+          <span className="hide-sm">{String(page + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span>
           <Button variant="ghost" size="icon" onClick={() => setSoundOn((value) => !value)} aria-label={soundOn ? "Desativar som de página" : "Ativar som de página"}>{soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}</Button>
         </div>
       </header>
+      {aboutOpen && (
+        <div className="about-overlay" role="dialog" aria-modal="true" aria-label="Sobre a Via da Graça" onClick={() => setAboutOpen(false)}>
+          <div className="about-card" onClick={(e) => e.stopPropagation()}>
+            <button type="button" className="about-close" onClick={() => setAboutOpen(false)} aria-label="Fechar"><X size={18} /></button>
+            <p className="catalog-kicker">Feito à mão em Belém</p>
+            <h2>Cada peça nasce das mãos de artesãs</h2>
+            <div className="gold-rule" />
+            <p>Conta por conta, nó por nó, nossos terços e pulseiras são montados manualmente por artesãs paraenses. Escolhemos medalhas, fitas e contas com cuidado, para que cada peça carregue afeto, devoção e a memória do Círio de Nazaré.</p>
+            <p>Produzimos em pequena escala: por isso cada item é único e pode ter leves variações.</p>
+          </div>
+        </div>
+      )}
 
       <div className="magazine-stage" onTouchStart={(event) => { touchStart.current = event.touches[0]?.clientX ?? null; }} onTouchEnd={(event) => { const start = touchStart.current; const end = event.changedTouches[0]?.clientX; if (start !== null && end !== undefined && Math.abs(end - start) > 45) goTo(end < start ? page + 1 : page - 1); touchStart.current = null; }}>
         <div key={page} className={`magazine-page flip-${direction}`}>
