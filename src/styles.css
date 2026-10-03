@@ -122,7 +122,7 @@
   .magazine-page { min-height: calc(100svh - 120px); box-shadow: none; }
   .page-arrow { position: fixed; top: auto; bottom: 12px; width: 40px; height: 40px; }.page-arrow-left { left: 14px; }.page-arrow-right { right: 14px; }
   .page-dots { position: fixed; z-index: 30; bottom: 29px; left: 50%; max-width: calc(100vw - 130px); transform: translateX(-50%); gap: 5px; }.page-dots button { width: 9px; }.page-dots button.active { width: 20px; }
-  .cover-page, .back-cover { min-height: calc(100svh - 120px); }.cover-content { padding: 44px 24px 100px; }.cover-logo { width: min(320px, 78vw); }.cover-links { flex-direction: column; gap: 14px; }.cover-rope { position: absolute; z-index: 2; left: -30%; top: 50%; width: 78%; height: auto; opacity: .85; transform: translateY(-50%) rotate(78deg); filter: drop-shadow(0 6px 8px color-mix(in oklab, var(--foreground) 18%, transparent)); pointer-events: none; }.ribbons { right: 1%; opacity: .35; }
+  .cover-page, .back-cover { min-height: calc(100svh - 120px); }.cover-content { padding: 44px 24px 100px; }.cover-logo { width: min(320px, 78vw); }.cover-links { flex-direction: column; gap: 14px; }.cover-rope { width: 110%; left: -62%; }.ribbons { right: 2%; height: 40%; opacity: .7; } .satin-ribbon { width: 20px; }
   .product-spread { min-height: calc(100svh - 120px); grid-template-columns: 1fr; grid-template-rows: 54svh auto; }
   .photo-page { padding: 10px 10px 0; border-right: 0; border-bottom: 1px solid var(--border); }.thumbnail-row { height: 64px; }.thumb { width: 42px; height: 50px; }
   .detail-page { justify-content: flex-start; padding: 35px 28px 46px; }.detail-page h2 { font-size: 44px; }.product-copy { font-size: 19px; }.detail-page ul { margin-top: 18px; }.price-block { margin-top: 20px; }
