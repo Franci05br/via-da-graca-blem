@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Instagram, MessageCircle, Music2, MusicOff } from "lucide-react";
+import { ArrowLeft, ArrowRight, Instagram, MessageCircle, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/via-da-graca-logo.svg";
 import corda from "@/assets/corda.png";
@@ -217,13 +217,13 @@ function Catalog() {
         <img src={logo} alt="Via da Graça" />
         <div className="bar-actions">
           <span>{String(page + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span>
-          <Button variant="ghost" size="icon" onClick={() => setSoundOn((value) => !value)} aria-label={soundOn ? "Desativar som de página" : "Ativar som de página"}>{soundOn ? <Music2 size={18} /> : <MusicOff size={18} />}</Button>
+          <Button variant="ghost" size="icon" onClick={() => setSoundOn((value) => !value)} aria-label={soundOn ? "Desativar som de página" : "Ativar som de página"}>{soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}</Button>
         </div>
       </header>
 
       <div className="magazine-stage" onTouchStart={(event) => { touchStart.current = event.touches[0]?.clientX ?? null; }} onTouchEnd={(event) => { const start = touchStart.current; const end = event.changedTouches[0]?.clientX; if (start !== null && end !== undefined && Math.abs(end - start) > 45) goTo(end < start ? page + 1 : page - 1); touchStart.current = null; }}>
         <div key={page} className={`magazine-page flip-${direction}`}>
-          {page === 0 ? <Cover /> : page === totalPages - 1 ? <BackCover /> : <ProductPage product={products[page - 1]} number={page} />}
+          {page === 0 ? <Cover /> : page === totalPages - 1 ? <BackCover /> : <ProductPage product={products[page - 1]!} number={page} />}
         </div>
         <button className="page-arrow page-arrow-left" type="button" onClick={() => goTo(page - 1)} disabled={page === 0} aria-label="Página anterior"><ArrowLeft /></button>
         <button className="page-arrow page-arrow-right" type="button" onClick={() => goTo(page + 1)} disabled={page === totalPages - 1} aria-label="Próxima página"><ArrowRight /></button>
