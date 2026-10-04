@@ -106,7 +106,7 @@ function BasilicaLineArt() {
 function GreenRibbon() {
   return (
     <svg className="cirio-sash" viewBox="0 0 360 64" aria-hidden="true">
-      <path d="M0 8h360v48H0l26-24Z" fill="var(--sash-green)" />
+      <path d="M0 8h360v48H0l26-24Z" className="sash-body" />
       <path d="M0 8h360v9H0Z" fill="#000" opacity=".16" />
       <path d="M0 47h360v9H0l0 0Z" fill="#000" opacity=".1" />
       <path d="M26 32L0 56V8Z" fill="#000" opacity=".2" />
