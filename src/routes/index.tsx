@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Instagram, MessageCircle, Volume2, VolumeX, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/via-da-graca-logo.svg";
-import corda from "@/assets/corda.png";
+import corda from "@/assets/corda-curva.png";
 import ourLady from "@/assets/nossa-senhora-gravura.png";
 import pulseiraFe from "@/assets/p-fe.jpg";
 import pulseiraNazinha from "@/assets/p-nazinha.jpg";
@@ -249,7 +249,7 @@ function Catalog() {
   return (
     <main className="catalog-shell">
       <OurLadyLineArt />
-      <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1536} height={768} /></div>
+      <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={640} height={1600} /></div>
       <GreenRibbon />
       <header className="catalog-bar">
         <img src={logo} alt="Via da Graça" />
