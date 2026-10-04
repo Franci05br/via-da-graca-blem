@@ -79,7 +79,7 @@
 @keyframes sash-float { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(-3deg) translateY(-3px); } }
 .cirio-sash .sash-body { fill: var(--sash-green); }
 .sash-text { font-family: var(--font-display); font-size: 16px; font-weight: 600; font-style: italic; fill: var(--gold-text); letter-spacing: .05em; }
-.our-lady { position: fixed; z-index: 1; right: -18px; top: 84px; height: min(56vh, 430px); width: auto; opacity: .62; pointer-events: none; }
+.our-lady { position: fixed; z-index: 3; right: -18px; top: 84px; height: min(56vh, 430px); width: auto; opacity: .62; pointer-events: none; }
 .magazine-stage { z-index: 2; }
 .bar-menu { display: flex; align-items: center; gap: 26px; }
 .bar-menu > button, .bar-menu > a, .menu-item > button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; color: var(--primary); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; cursor: pointer; padding: 6px 0; border-bottom: 1px solid transparent; }
@@ -116,7 +116,7 @@
 .fixed-instagram { display: none !important; position: fixed; z-index: 40; right: 22px; bottom: 20px; display: flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-size: 11px; font-weight: 700; }
 
 @media (max-width: 760px) {
-  .catalog-shell { padding: 70px 0 46px; overflow-y: auto; } .hide-sm { display: none; } .bar-menu { gap: 14px; } .bar-menu > button, .menu-item > button { font-size: 10px; letter-spacing: .08em; } .our-lady { display: none; } .about-card { padding: 40px 24px; }
+  .catalog-shell { padding: 70px 0 46px; overflow-y: auto; } .hide-sm { display: none; } .bar-menu { gap: 14px; } .bar-menu > button, .menu-item > button { font-size: 10px; letter-spacing: .08em; } .our-lady { height: 190px; top: 66px; right: -24px; opacity: .3; } .about-card { padding: 40px 24px; }
   .catalog-bar { height: 58px; padding: 0 14px; }.catalog-bar > img { width: 112px; }
   .magazine-stage { width: 100%; height: auto; min-height: calc(100svh - 120px); perspective: 1200px; }
   .magazine-page { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--paper); transform-style: preserve-3d; transform-origin: center right; }
