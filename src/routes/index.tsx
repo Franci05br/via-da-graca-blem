@@ -103,39 +103,35 @@ function BasilicaLineArt() {
   );
 }
 
-const ribbonColors = ["var(--ribbon-red)", "var(--ribbon-yellow)", "var(--ribbon-green)", "var(--ribbon-blue)", "var(--ribbon-white)"];
-
-function RibbonDetails() {
+function GreenRibbon() {
   return (
-    <div className="ribbons" aria-hidden="true">
-      {ribbonColors.map((color, index) => (
-        <svg key={color} className="satin-ribbon" viewBox="0 0 44 420" style={{ animationDelay: `${index * -1.3}s` }}>
-          <defs>
-            <linearGradient id={`sheen-${index}`} x1="0" x2="1">
-              <stop offset="0" stopColor="#000" stopOpacity=".18" />
-              <stop offset=".45" stopColor="#fff" stopOpacity=".45" />
-              <stop offset="1" stopColor="#000" stopOpacity=".12" />
-            </linearGradient>
-          </defs>
-          <path d="M8 0h28c-6 90 8 170 0 260s6 120 0 150l-14-14-14 14c-6-40 6-80 0-150S2 90 8 0Z" fill={color} />
-          <path d="M8 0h28c-6 90 8 170 0 260s6 120 0 150l-14-14-14 14c-6-40 6-80 0-150S2 90 8 0Z" fill={`url(#sheen-${index})`} />
-          <text x="22" y="40" transform="rotate(90 22 40)" className="ribbon-text">Lembrança do Círio de N. Sra. de Nazaré</text>
-        </svg>
-      ))}
-    </div>
+    <svg className="cirio-sash" viewBox="0 0 360 64" aria-hidden="true">
+      <path d="M0 8h360v48H0l26-24Z" fill="var(--sash-green)" />
+      <path d="M0 8h360v9H0Z" fill="#000" opacity=".16" />
+      <path d="M0 47h360v9H0l0 0Z" fill="#000" opacity=".1" />
+      <path d="M26 32L0 56V8Z" fill="#000" opacity=".2" />
+      <text x="196" y="39" textAnchor="middle" className="sash-text">Feliz Círio de Nazaré 2026</text>
+    </svg>
   );
 }
 
 function OurLadyLineArt() {
+  const rays = Array.from({ length: 28 }, (_, i) => {
+    const a = (i * (360 / 28) * Math.PI) / 180;
+    const r1 = 66, r2 = i % 2 ? 88 : 104;
+    return { x1: 130 + Math.cos(a) * r1, y1: 128 + Math.sin(a) * r1, x2: 130 + Math.cos(a) * r2, y2: 128 + Math.sin(a) * r2, o: i % 2 ? 0.45 : 0.9 };
+  });
   return (
-    <svg className="our-lady" viewBox="0 0 200 320" aria-hidden="true">
-      <g fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
-        <path d="M100 20l6 10 12-6-4 12 12 2-10 8" /><path d="M100 20l-6 10-12-6 4 12-12 2 10 8" />
-        <circle cx="100" cy="62" r="13" /><circle cx="100" cy="62" r="24" strokeDasharray="2 5" />
-        <path d="M100 46c-26 4-38 30-40 70-4 70-26 130-30 180h140c-4-50-26-110-30-180-2-40-14-66-40-70" />
-        <path d="M86 98c6 10 22 10 28 0M78 130c14 18 30 18 44 0M100 112v178M70 200c20 12 40 12 60 0" />
-        <circle cx="100" cy="148" r="8" /><circle cx="100" cy="148" r="4" />
-        <path d="M24 300h152M40 312h120" />
+    <svg className="our-lady" viewBox="0 0 260 380" aria-hidden="true">
+      <g fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
+        {rays.map((r, i) => <line key={i} x1={r.x1} y1={r.y1} x2={r.x2} y2={r.y2} opacity={r.o} />)}
+        <path d="M106 78l7-20 9 13 8-19 8 19 9-13 7 20c-16-8-32-8-48 0Z" />
+        <circle cx="130" cy="98" r="15" />
+        <path d="M122 96c2 5 14 5 16 0M124 92h2M134 92h2" />
+        <path d="M130 83c-32 6-47 36-49 82-4 78-31 146-35 204h168c-4-58-31-126-35-204-2-46-17-76-49-82" />
+        <path d="M110 128c13 13 27 13 40 0M102 172c19 17 37 17 56 0M130 116v252" />
+        <path d="M96 236l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1ZM166 258l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1ZM130 300l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z" />
+        <path d="M58 372h144M74 380h112" />
       </g>
     </svg>
   );
@@ -182,8 +178,6 @@ function Cover() {
   return (
     <section className="cover-page">
       <BasilicaLineArt />
-      <RibbonDetails />
-      <img src={corda} alt="" className="cover-rope" width={1536} height={768} />
       <div className="cover-content">
         <p className="cover-edition">Catálogo artesanal · Belém do Pará</p>
         <img src={logo} alt="Via da Graça — Feito com Fé" className="cover-logo" />
@@ -257,6 +251,8 @@ function Catalog() {
   return (
     <main className="catalog-shell">
       <OurLadyLineArt />
+      <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1536} height={768} /></div>
+      <GreenRibbon />
       <header className="catalog-bar">
         <img src={logo} alt="Via da Graça" />
         <nav className="bar-menu" aria-label="Menu">
