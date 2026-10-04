@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Instagram, MessageCircle, Volume2, VolumeX, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/via-da-graca-logo.svg";
-import corda from "@/assets/corda.png";
+import corda from "@/assets/corda-curva.png";
 import ourLady from "@/assets/nossa-senhora-gravura.png";
 import pulseiraFe from "@/assets/p-fe.jpg";
 import pulseiraNazinha from "@/assets/p-nazinha.jpg";
@@ -106,13 +106,27 @@ function BasilicaLineArt() {
 
 function GreenRibbon() {
   return (
-    <svg className="cirio-sash" viewBox="0 0 360 64" aria-hidden="true">
-      <path d="M0 8h360v48H0l26-24Z" className="sash-body" />
-      <path d="M0 8h360v20H0Z" fill="#fff" opacity=".08" />
-      <path d="M0 8h360v9H0Z" fill="#000" opacity=".16" />
-      <path d="M0 47h360v9H0l0 0Z" fill="#000" opacity=".1" />
-      <path d="M26 32L0 56V8Z" fill="#000" opacity=".2" />
-      <text x="196" y="39" textAnchor="middle" className="sash-text">Feliz Círio de Nazaré 2026</text>
+    <svg className="cirio-sash" viewBox="0 0 420 120" aria-hidden="true">
+      <defs>
+        <linearGradient id="satin" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="oklch(.5 .1 160)" />
+          <stop offset=".35" stopColor="oklch(.44 .095 160)" />
+          <stop offset=".7" stopColor="oklch(.36 .085 160)" />
+          <stop offset="1" stopColor="oklch(.3 .07 160)" />
+        </linearGradient>
+        <linearGradient id="satinDark" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="oklch(.28 .07 160)" />
+          <stop offset="1" stopColor="oklch(.38 .085 160)" />
+        </linearGradient>
+      </defs>
+      {/* left tail with V-cut, curling down */}
+      <path d="M78 46 C58 50 40 66 24 84 L6 98 L30 96 L18 116 C40 100 58 82 82 74 Z" fill="url(#satinDark)" />
+      {/* right tail curling up */}
+      <path d="M346 30 C368 26 386 14 400 4 L414 6 L402 20 L418 26 C398 38 372 54 342 58 Z" fill="url(#satinDark)" />
+      {/* main body: gentle wave only at ends, flat center */}
+      <path d="M70 44 C110 36 140 34 210 34 C280 34 310 32 350 26 L350 58 C310 64 280 66 210 66 C140 66 110 68 70 76 Z" fill="url(#satin)" />
+      <path d="M70 44 C110 36 140 34 210 34 C280 34 310 32 350 26 L350 33 C310 39 280 41 210 41 C140 41 110 43 70 51 Z" fill="#fff" opacity=".12" />
+      <text x="210" y="56" textAnchor="middle" className="sash-text">Feliz Círio de Nazaré 2026</text>
     </svg>
   );
 }
@@ -235,7 +249,7 @@ function Catalog() {
   return (
     <main className="catalog-shell">
       <OurLadyLineArt />
-      <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1536} height={768} /></div>
+      <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={640} height={1600} /></div>
       <GreenRibbon />
       <header className="catalog-bar">
         <img src={logo} alt="Via da Graça" />
