@@ -75,10 +75,11 @@
 .cover-instruction { position: absolute; z-index: 4; bottom: 22px; left: 50%; margin: 0; transform: translateX(-50%); color: var(--muted-foreground); font-size: 10px; text-transform: uppercase; letter-spacing: .14em; white-space: nowrap; }
 .scene-rope { position: fixed; z-index: 3; left: 0; top: 64px; bottom: 0; width: clamp(130px, 14vw, 220px); overflow: hidden; pointer-events: none; }
 .scene-rope img { width: 100%; height: 100%; object-fit: cover; object-position: 32% 50%; opacity: .92; }
-.cirio-sash { position: fixed; z-index: 3; right: 0; top: clamp(140px, 22vh, 230px); width: min(360px, 34vw); pointer-events: none; }
+.cirio-sash { position: fixed; z-index: 3; right: -6px; bottom: clamp(90px, 17vh, 170px); width: min(340px, 30vw); transform: rotate(-4deg); transform-origin: right center; filter: drop-shadow(0 6px 8px color-mix(in oklab, var(--foreground) 14%, transparent)); pointer-events: none; animation: sash-float 7s ease-in-out infinite; }
+@keyframes sash-float { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(-3deg) translateY(-3px); } }
 .cirio-sash .sash-body { fill: var(--sash-green); }
-.sash-text { font-family: var(--font-display); font-size: 16px; font-weight: 600; font-style: italic; fill: var(--gold-text); letter-spacing: .05em; }
-.our-lady { position: fixed; z-index: 3; right: 2.5vw; top: 76px; width: clamp(140px, 15vw, 240px); color: color-mix(in oklab, var(--gold) 48%, transparent); pointer-events: none; }
+.sash-text { font-family: var(--font-display); font-size: 18px; font-weight: 600; font-style: italic; fill: var(--gold-text); letter-spacing: .05em; }
+.our-lady { position: fixed; z-index: 3; right: -18px; top: 84px; height: min(56vh, 430px); width: auto; opacity: .62; pointer-events: none; }
 .magazine-stage { z-index: 2; }
 .bar-menu { display: flex; align-items: center; gap: 26px; }
 .bar-menu > button, .bar-menu > a, .menu-item > button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; color: var(--primary); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; cursor: pointer; padding: 6px 0; border-bottom: 1px solid transparent; }
@@ -115,13 +116,13 @@
 .fixed-instagram { display: none !important; position: fixed; z-index: 40; right: 22px; bottom: 20px; display: flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-size: 11px; font-weight: 700; }
 
 @media (max-width: 760px) {
-  .catalog-shell { padding: 70px 0 46px; overflow-y: auto; } .hide-sm { display: none; } .bar-menu { gap: 14px; } .bar-menu > button, .menu-item > button { font-size: 10px; letter-spacing: .08em; } .our-lady { display: none; } .about-card { padding: 40px 24px; }
+  .catalog-shell { padding: 70px 0 46px; overflow-y: auto; } .hide-sm { display: none; } .bar-menu { gap: 14px; } .bar-menu > button, .menu-item > button { font-size: 10px; letter-spacing: .08em; } .our-lady { height: 190px; top: 66px; right: -24px; opacity: .3; } .about-card { padding: 40px 24px; }
   .catalog-bar { height: 58px; padding: 0 14px; }.catalog-bar > img { width: 112px; }
   .magazine-stage { width: 100%; height: auto; min-height: calc(100svh - 120px); perspective: 1200px; }
   .magazine-page { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--paper); transform-style: preserve-3d; transform-origin: center right; }
   .page-arrow { position: fixed; top: auto; bottom: 12px; width: 40px; height: 40px; }.page-arrow-left { left: 14px; }.page-arrow-right { right: 14px; }
   .page-dots { position: fixed; z-index: 30; bottom: 29px; left: 50%; max-width: calc(100vw - 130px); transform: translateX(-50%); gap: 5px; }.page-dots button { width: 9px; }.page-dots button.active { width: 20px; }
-  .cover-page, .back-cover { min-height: calc(100svh - 120px); }.cover-content { padding: 44px 24px 100px; }.cover-logo { width: min(320px, 78vw); }.cover-links { flex-direction: column; gap: 14px; }.scene-rope { width: 84px; top: 58px; } .cirio-sash { width: 230px; top: 68px; }
+  .cover-page, .back-cover { min-height: calc(100svh - 120px); }.cover-content { padding: 44px 24px 100px; }.cover-logo { width: min(320px, 78vw); }.cover-links { flex-direction: column; gap: 14px; }.scene-rope { width: 84px; top: 58px; } .cirio-sash { width: 240px; bottom: 150px; }
   .product-spread { min-height: calc(100svh - 120px); grid-template-columns: 1fr; grid-template-rows: 54svh auto; }
   .photo-page { padding: 10px 10px 0; border-right: 0; border-bottom: 1px solid var(--border); }.thumbnail-row { height: 64px; }.thumb { width: 42px; height: 50px; }
   .detail-page { justify-content: flex-start; padding: 35px 28px 46px; }.detail-page h2 { font-size: 44px; }.product-copy { font-size: 19px; }.detail-page ul { margin-top: 18px; }.price-block { margin-top: 20px; }

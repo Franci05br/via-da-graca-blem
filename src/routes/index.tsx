@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Instagram, MessageCircle, Volume2, VolumeX, X } 
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/via-da-graca-logo.svg";
 import corda from "@/assets/corda.png";
+import ourLady from "@/assets/nossa-senhora-gravura.png";
 import pulseiraFe from "@/assets/p-fe.jpg";
 import pulseiraNazinha from "@/assets/p-nazinha.jpg";
 import infantil from "@/assets/p-infantil.jpg";
@@ -107,6 +108,7 @@ function GreenRibbon() {
   return (
     <svg className="cirio-sash" viewBox="0 0 360 64" aria-hidden="true">
       <path d="M0 8h360v48H0l26-24Z" className="sash-body" />
+      <path d="M0 8h360v20H0Z" fill="#fff" opacity=".08" />
       <path d="M0 8h360v9H0Z" fill="#000" opacity=".16" />
       <path d="M0 47h360v9H0l0 0Z" fill="#000" opacity=".1" />
       <path d="M26 32L0 56V8Z" fill="#000" opacity=".2" />
@@ -116,25 +118,7 @@ function GreenRibbon() {
 }
 
 function OurLadyLineArt() {
-  const rays = Array.from({ length: 28 }, (_, i) => {
-    const a = (i * (360 / 28) * Math.PI) / 180;
-    const r1 = 66, r2 = i % 2 ? 88 : 104;
-    return { x1: 130 + Math.cos(a) * r1, y1: 128 + Math.sin(a) * r1, x2: 130 + Math.cos(a) * r2, y2: 128 + Math.sin(a) * r2, o: i % 2 ? 0.45 : 0.9 };
-  });
-  return (
-    <svg className="our-lady" viewBox="0 0 260 380" aria-hidden="true">
-      <g fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
-        {rays.map((r, i) => <line key={i} x1={r.x1} y1={r.y1} x2={r.x2} y2={r.y2} opacity={r.o} />)}
-        <path d="M106 78l7-20 9 13 8-19 8 19 9-13 7 20c-16-8-32-8-48 0Z" />
-        <circle cx="130" cy="98" r="15" />
-        <path d="M122 96c2 5 14 5 16 0M124 92h2M134 92h2" />
-        <path d="M130 83c-32 6-47 36-49 82-4 78-31 146-35 204h168c-4-58-31-126-35-204-2-46-17-76-49-82" />
-        <path d="M110 128c13 13 27 13 40 0M102 172c19 17 37 17 56 0M130 116v252" />
-        <path d="M96 236l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1ZM166 258l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1ZM130 300l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z" />
-        <path d="M58 372h144M74 380h112" />
-      </g>
-    </svg>
-  );
+  return <img src={ourLady} alt="" aria-hidden="true" className="our-lady" width={768} height={1152} />;
 }
 
 const categories = [
