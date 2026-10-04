@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "5beda843-a29a-4b69-8302-95c6e38b5657",
-  "project_id": "bc4bc5f8-3465-4d50-b1dd-d361a94b5e4e",
-  "url": "/__l5e/assets-v1/5beda843-a29a-4b69-8302-95c6e38b5657/tercos-artesanais.jpg",
-  "r2_key": "a/v1/bc4bc5f8-3465-4d50-b1dd-d361a94b5e4e/5beda843-a29a-4b69-8302-95c6e38b5657/tercos-artesanais.jpg",
-  "original_filename": "tercos-artesanais.jpg",
-  "size": 66833,
   "content_type": "image/jpeg",
-  "created_at": "2026-09-30T10:54:43Z"
+  "created_at": "2026-09-30T10:54:43Z",
+  "original_filename": "tercos-artesanais.jpg",
+  "project_id": "f642ed89-2b5a-4802-b006-6bebd3799b3d",
+  "r2_key": "a/v1/f642ed89-2b5a-4802-b006-6bebd3799b3d/5beda843-a29a-4b69-8302-95c6e38b5657/tercos-artesanais.jpg",
+  "size": 66833,
+  "url": "/__l5e/assets-v1/5beda843-a29a-4b69-8302-95c6e38b5657/tercos-artesanais.jpg",
+  "version": 1
 }
