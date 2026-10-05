@@ -306,7 +306,9 @@ function Catalog() {
 
       <a className="fixed-instagram" href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" aria-label="Instagram da Via da Graça"><Instagram size={20} /><span>@viadagraca._</span></a>
     </main>
-    {page === 0 && <HomeExtras />}
+    <PrayerSection />
+    {page === 0 && <HowSection />}
+    <SiteFooter />
     </>
   );
 }
@@ -317,9 +319,20 @@ const steps = [
   ["03", "Receba em Belém", "Combinamos entrega ou retirada e o pagamento acontece no recebimento."],
 ] as const;
 
-function HomeExtras() {
+function PrayerSection() {
   return (
-    <>
+    <section className="prayer-section" aria-label="Mensagem de fé">
+      <span className="prayer-mark" aria-hidden="true">✦</span>
+      <blockquote>
+        <p>“Maria guardava todas estas coisas, meditando-as em seu coração.”</p>
+        <cite>Lucas 2,19</cite>
+      </blockquote>
+    </section>
+  );
+}
+
+function HowSection() {
+  return (
       <section id="como-funciona" className="how-section">
         <div className="how-grid">
           <div className="how-text">
@@ -333,6 +346,11 @@ function HomeExtras() {
           <div className="how-photo"><img src={cordaCirio.url} alt="Mãos unidas segurando a corda do Círio de Nazaré" loading="lazy" /></div>
         </div>
       </section>
+  );
+}
+
+function SiteFooter() {
+  return (
       <footer className="site-footer">
         <div className="footer-grid">
           <div><img src={logo} alt="Via da Graça" className="footer-logo" /><p>Terços, pulseiras e artigos devocionais feitos artesanalmente em Belém do Pará.</p></div>
@@ -341,6 +359,5 @@ function HomeExtras() {
         </div>
         <div className="footer-bottom"><span>© 2026 Via da Graça. Feito com fé.</span><span>Atendimento em Belém-PA</span></div>
       </footer>
-    </>
   );
 }
