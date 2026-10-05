@@ -213,3 +213,4 @@
   .how-photo { aspect-ratio: 4 / 3; }
   .footer-bottom { flex-direction: column; }
 }
+.cover-page { background: #ffffff; } /* teste: fundo da capa em branco puro (anterior: var(--paper)) */
