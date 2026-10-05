@@ -223,7 +223,8 @@
 .prayer-section cite::before { content: ""; display: block; width: 48px; height: 1px; margin: 0 auto 18px; background: var(--gold); }
 
 /* Desktop: align cover CTA with header "Falar com a artesã" column */
-@media (min-width: 1025px) { .cover-enter.cover-enter-lg { right: calc(50% - 50vw + 224px); } }
+@media (min-width: 1025px) { .cover-enter.cover-enter-lg { right: clamp(24px, 4%, 48px); bottom: auto; top: 54%; white-space: nowrap; } }
+@media (min-width: 761px) { .page-arrow { top: auto; bottom: 90px; } }
 /* Mobile: page controls sit at the end of the content, not floating */
 @media (max-width: 760px) {
   .magazine-stage { padding-bottom: 64px; }

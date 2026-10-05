@@ -239,9 +239,19 @@ function Catalog() {
     setDirection(bounded > page ? "next" : "prev"); setPage(bounded); paperSound();
   }, [page, paperSound, totalPages]);
 
+  const loaded = useRef(false);
   useEffect(() => {
-    const url = new URL(window.location.href); url.searchParams.set("page", String(page + 1)); window.history.replaceState({}, "", url);
-    document.title = `${page + 1}/${totalPages} — Via da Graça`;
+    const n = Number(new URLSearchParams(window.location.search).get("page"));
+    if (n > 0 && n < totalPages) setPage(n);
+    loaded.current = true;
+  }, [totalPages]);
+
+  useEffect(() => {
+    if (!loaded.current) return;
+    const url = new URL(window.location.href);
+    if (page === 0) url.searchParams.delete("page"); else url.searchParams.set("page", String(page));
+    window.history.replaceState({}, "", url);
+    document.title = page === 0 ? "Via da Graça — Catálogo" : `${page}/${totalPages - 1} — Via da Graça`;
   }, [page, totalPages]);
 
   useEffect(() => {
