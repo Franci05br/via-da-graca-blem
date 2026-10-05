@@ -265,7 +265,7 @@ function Catalog() {
           </div>
           <button type="button" onClick={() => { setAboutOpen(true); setMenuOpen(false); }}>Sobre</button>
           <a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" aria-label="Instagram da Via da Graça"><Instagram size={18} /></a>
-          <a className="bar-cta" href={whatsappUrl("uma peça da coleção")} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Fale com a artesã</span></a>
+          <a className="bar-cta" href={whatsappUrl("uma peça da coleção")} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Falar com a artesã</span></a>
         </nav>
         <div className="bar-actions">
           <span className="hide-sm">{String(page + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span>
