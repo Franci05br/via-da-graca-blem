@@ -214,4 +214,3 @@
   .footer-bottom { flex-direction: column; }
 }
 .cover-page { background: #ffffff; } /* teste: fundo da capa em branco puro (anterior: var(--paper)) */
-.catalog-shell.is-cover { background: #ffffff; }
