@@ -306,7 +306,7 @@ function Catalog() {
 
       <a className="fixed-instagram" href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" aria-label="Instagram da Via da Graça"><Instagram size={20} /><span>@viadagraca._</span></a>
     </main>
-    <PrayerSection />
+    {page > 0 && <PrayerSection page={page} />}
     {page === 0 && <HowSection />}
     <SiteFooter />
     </>
@@ -319,13 +319,24 @@ const steps = [
   ["03", "Receba em Belém", "Combinamos entrega ou retirada e o pagamento acontece no recebimento."],
 ] as const;
 
-function PrayerSection() {
+const prayers = [
+  ["“O Todo-Poderoso fez em mim grandes coisas, e Santo é o seu nome.”", "Lucas 1,49"],
+  ["“Ó Virgem de Nazaré, Rainha da Amazônia, acolhei sob o vosso manto as nossas famílias.”", "Prece a Nossa Senhora de Nazaré"],
+  ["“Deixai vir a mim as criancinhas, porque delas é o Reino de Deus.”", "Marcos 10,14"],
+  ["“Tudo o que pedirdes na oração, crede que o recebestes, e assim será.”", "Marcos 11,24"],
+  ["“Fazei tudo o que ele vos disser.”", "João 2,5"],
+  ["“Maria guardava todas estas coisas, meditando-as em seu coração.”", "Lucas 1,19 · Lucas 2,19"],
+  ["“À vossa proteção recorremos, Santa Mãe de Deus.”", "Sub tuum praesidium"],
+] as const;
+
+function PrayerSection({ page }: { page: number }) {
+  const [text, cite] = prayers[(page - 1) % prayers.length]!;
   return (
     <section className="prayer-section" aria-label="Mensagem de fé">
       <span className="prayer-mark" aria-hidden="true">✦</span>
-      <blockquote>
-        <p>“Maria guardava todas estas coisas, meditando-as em seu coração.”</p>
-        <cite>Lucas 2,19</cite>
+      <blockquote key={page}>
+        <p>{text}</p>
+        <cite>{cite}</cite>
       </blockquote>
     </section>
   );
