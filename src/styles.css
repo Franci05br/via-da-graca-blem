@@ -154,3 +154,19 @@
 .bar-menu > a.bar-cta { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 0; border-radius: 2px; background: var(--primary); color: var(--primary-foreground); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; transition: opacity 180ms ease; }
 .bar-menu > a.bar-cta:hover { opacity: .88; border-color: transparent; }
 @media (max-width: 640px) { .bar-menu > a.bar-cta span { display: none; } .bar-menu > a.bar-cta { padding: 8px; } }
+
+/* Product photos: show the whole piece, never crop */
+.photo-frame { display: flex; align-items: center; justify-content: center; background: var(--paper-deep); }
+.photo-frame > img { object-fit: contain; padding: 12px; }
+.detail-page { padding: 40px 48px 32px; overflow-y: auto; }
+.detail-page h2 { font-size: clamp(36px, 3.6vw, 56px); }
+.gold-rule { margin: 20px 0; }
+.product-copy { font-size: 19px; }
+.detail-page ul { margin-top: 16px; }
+.price-block { margin-top: 18px; }
+@media (max-width: 760px) {
+  .product-spread { grid-template-rows: auto auto; }
+  .photo-frame { flex: none; aspect-ratio: 1 / 1; }
+  .photo-frame > img { padding: 8px; }
+  .detail-page { overflow: visible; padding: 32px 28px 90px; }
+}

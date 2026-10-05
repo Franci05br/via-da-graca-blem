@@ -29,28 +29,28 @@ const products: Product[] = [
     edition: "Coleção Círio",
     description: "Contas azul-marianas e símbolos delicados compõem uma peça para levar a devoção sempre por perto.",
     details: ["Contas naturais", "Pingentes em metal envelhecido", "Acabamento ajustável"],
-    images: [pulseiraFe, pulseiraNazinha],
+    images: [pulseiraFe],
   },
   {
     name: "Pulseira Nazinha",
     edition: "Edição artesanal",
     description: "Uma composição afetiva de contas claras e vermelhas, medalhas e fitas em tons suaves.",
     details: ["Montagem manual", "Medalhas devocionais", "Pompom de fios coloridos"],
-    images: [pulseiraNazinha, pulseiraFe],
+    images: [pulseiraNazinha],
   },
   {
     name: "Dezeninha Infantil",
     edition: "Pequenos gestos de fé",
     description: "Leve, alegre e delicada, foi pensada para acompanhar as crianças em seus primeiros caminhos de oração.",
     details: ["Contas amarelas", "Pingentes leves", "Tamanho infantil"],
-    images: [infantil, amarelo],
+    images: [infantil],
   },
   {
     name: "Dezenas de Fé",
     edition: "Três variações",
     description: "Terços compactos para usar no pulso, reunindo madeira, hematita e símbolos de proteção.",
     details: ["Três combinações", "Contas de pedra ou madeira", "Crucifixos e medalhas"],
-    images: [dezenas, perola],
+    images: [dezenas],
   },
   {
     name: "Terços de Pulso",
@@ -67,6 +67,9 @@ const products: Product[] = [
     images: [imagemGrande, imagemPequena],
   },
 ];
+
+// Rope kept for future sections; hidden on the cover for now.
+const SHOW_COVER_ROPE = false;
 
 function whatsappUrl(name?: string) {
   const message = name
@@ -149,13 +152,13 @@ function ProductPage({ product, number }: { product: Product; number: number }) 
     <article className="product-spread">
       <div className="photo-page">
         <div className="photo-frame"><img src={product.images[selected]} alt={`${product.name} — vista ${selected + 1}`} /></div>
-        <div className="thumbnail-row" aria-label={`Outras vistas de ${product.name}`}>
+        {product.images.length > 1 && <div className="thumbnail-row" aria-label={`Outras vistas de ${product.name}`}>
           {product.images.map((image, index) => (
             <button key={image} type="button" onClick={() => setSelected(index)} className={selected === index ? "thumb active" : "thumb"} aria-label={`Ver imagem ${index + 1}`} aria-pressed={selected === index}>
               <img src={image} alt="" />
             </button>
           ))}
-        </div>
+        </div>}
       </div>
       <div className="detail-page">
         <span className="page-number">{String(number).padStart(2, "0")}</span>
@@ -250,7 +253,7 @@ function Catalog() {
   return (
     <main className={`catalog-shell ${page === 0 ? "is-cover" : ""}`}>
       <OurLadyLineArt />
-      {page === 0 && <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1007} height={672} /></div>}
+      {SHOW_COVER_ROPE && page === 0 && <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1007} height={672} /></div>}
       {page === 0 && <GreenRibbon />}
       <header className="catalog-bar">
         <img src={logo} alt="Via da Graça" />
