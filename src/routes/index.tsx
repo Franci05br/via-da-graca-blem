@@ -325,7 +325,7 @@ const prayers = [
   ["“Deixai vir a mim as criancinhas, porque delas é o Reino de Deus.”", "Marcos 10,14"],
   ["“Tudo o que pedirdes na oração, crede que o recebestes, e assim será.”", "Marcos 11,24"],
   ["“Fazei tudo o que ele vos disser.”", "João 2,5"],
-  ["“Maria guardava todas estas coisas, meditando-as em seu coração.”", "Lucas 1,19 · Lucas 2,19"],
+  ["“Maria guardava todas estas coisas, meditando-as em seu coração.”", "Lucas 2,19"],
   ["“À vossa proteção recorremos, Santa Mãe de Deus.”", "Sub tuum praesidium"],
 ] as const;
 
