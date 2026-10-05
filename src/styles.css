@@ -98,12 +98,12 @@
 .about-card p:not(.catalog-kicker) { color: var(--muted-foreground); font-family: var(--font-display); font-size: 19px; line-height: 1.45; }
 .about-close { position: absolute; top: 14px; right: 14px; border: 0; background: none; color: var(--primary); cursor: pointer; }
 
-.product-spread { display: grid; height: 100%; grid-template-columns: 1.08fr .92fr; background: var(--paper); }
-.photo-page { min-width: 0; display: flex; flex-direction: column; padding: 28px 18px 22px 28px; border-right: 1px solid color-mix(in oklab, var(--border) 55%, transparent); }
-.photo-frame { min-height: 0; flex: 1; overflow: hidden; background: var(--secondary); }
-.photo-frame > img { width: 100%; height: 100%; object-fit: cover; animation: image-reveal 720ms ease-out both; }
+.product-spread { display: grid; height: 100%; grid-template-columns: 1.08fr .92fr; grid-template-rows: minmax(0, 1fr); background: var(--paper); }
+.photo-page { min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: 28px 18px 22px 28px; border-right: 1px solid color-mix(in oklab, var(--border) 55%, transparent); }
+.photo-frame { min-height: 0; flex: 1 1 0; overflow: hidden; background: var(--secondary); }
+.photo-frame > img { width: 100%; height: 100%; min-height: 0; object-fit: contain; animation: image-reveal 720ms ease-out both; }
 @keyframes image-reveal { from { opacity: .25; scale: 1.025; } to { opacity: 1; scale: 1; } }
-.thumbnail-row { display: flex; align-items: center; justify-content: center; gap: 9px; height: 72px; padding-top: 12px; }
+.thumbnail-row { flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 9px; height: 72px; padding-top: 12px; }
 .thumb { width: 48px; height: 58px; overflow: hidden; border: 1px solid transparent; padding: 0; background: var(--muted); cursor: pointer; opacity: .62; transition: opacity 180ms ease, border 180ms ease; }
 .thumb.active { border-color: var(--gold); opacity: 1; }.thumb img { width: 100%; height: 100%; object-fit: cover; }
 .detail-page { position: relative; display: flex; min-width: 0; flex-direction: column; justify-content: center; padding: 62px 58px 54px; background-image: linear-gradient(90deg, color-mix(in oklab, var(--foreground) 4%, transparent), transparent 7%); }
@@ -170,3 +170,6 @@
   .photo-frame > img { padding: 8px; }
   .detail-page { overflow: visible; padding: 32px 28px 90px; }
 }
+.bar-logo { padding: 0; border: 0; background: none; cursor: pointer; display: flex; }
+.bar-logo img { width: 132px; height: 48px; object-fit: contain; object-position: left center; }
+@media (max-width: 760px) { .bar-logo img { width: 104px; } }

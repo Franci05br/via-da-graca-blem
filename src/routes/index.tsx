@@ -256,8 +256,9 @@ function Catalog() {
       {SHOW_COVER_ROPE && page === 0 && <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1007} height={672} /></div>}
       {page === 0 && <GreenRibbon />}
       <header className="catalog-bar">
-        <img src={logo} alt="Via da Graça" />
+        <button type="button" className="bar-logo" onClick={() => { goTo(0); setMenuOpen(false); }} aria-label="Voltar à capa"><img src={logo} alt="Via da Graça" /></button>
         <nav className="bar-menu" aria-label="Menu">
+          <button type="button" onClick={() => { goTo(0); setMenuOpen(false); }}>Home</button>
           <div className="menu-item">
             <button type="button" onClick={() => setMenuOpen((v) => !v)} aria-expanded={menuOpen}>Coleção</button>
             {menuOpen && (
