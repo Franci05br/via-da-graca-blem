@@ -183,8 +183,13 @@ function Cover({ onEnter }: { onEnter: () => void }) {
         <p className="cover-edition">Catálogo artesanal · Belém do Pará</p>
         <img src={logo} alt="Via da Graça — Feito com Fé" className="cover-logo" />
         <p className="cover-tagline">Pequenos símbolos.<br />Grandes histórias.</p>
-        <button type="button" className="cover-enter" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
+        <div className="cover-links cover-links-lg">
+          <a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer"><Instagram size={15} /> @viadagraca._</a>
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={15} /> Consultar coleção</a>
+        </div>
+        <button type="button" className="cover-enter cover-enter-sm" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       </div>
+      <button type="button" className="cover-enter cover-enter-lg" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       <p className="cover-instruction">Arraste ou use as setas para folhear</p>
     </section>
   );

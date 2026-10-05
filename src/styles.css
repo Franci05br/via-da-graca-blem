@@ -176,4 +176,13 @@
 .bar-actions > a.bar-cta { display: inline-flex; align-items: center; gap: 8px; margin-right: 10px; padding: 9px 16px; border-radius: 2px; background: var(--primary); color: var(--primary-foreground); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; text-decoration: none; }
 .bar-actions > a.bar-cta:hover { opacity: .88; }
 .cover-content .cover-enter { position: static; transform: none; margin-top: 32px; align-self: center; }
-@media (max-width: 760px) { .bar-actions > a.bar-cta.hide-sm, .bar-menu > .hide-sm { display: none; } .cover-content .cover-enter { margin-top: 26px; } }
+.cover-enter-sm { display: none !important; }
+@media (max-width: 760px) {
+  .bar-actions > a.bar-cta.hide-sm, .bar-menu > .hide-sm { display: none; }
+  .cover-enter-lg, .cover-links-lg { display: none !important; }
+  .cover-enter-sm { display: inline-flex !important; margin-top: 30px; }
+  .cover-content { padding: 92px 24px 150px; }
+  .cover-edition { margin-bottom: 26px; }
+  .is-cover .our-lady { top: 70px; height: 140px; opacity: .2; }
+  .cirio-sash { bottom: 150px; }
+}
