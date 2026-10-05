@@ -190,7 +190,7 @@
 /* Home: Como funciona + footer */
 .catalog-shell { position: relative; }
 .our-lady, .cirio-sash { position: absolute; }
-.how-section { background: #fff; border-top: 1px solid color-mix(in oklab, var(--gold) 35%, transparent); padding: clamp(64px, 9vw, 120px) 24px; }
+.how-section { background: oklch(.975 .018 88); border-top: 1px solid color-mix(in oklab, var(--gold) 35%, transparent); padding: clamp(64px, 9vw, 120px) 24px; }
 .how-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 88px); align-items: center; }
 .how-text h2 { font-family: var(--font-display); font-size: clamp(30px, 3.4vw, 44px); line-height: 1.1; color: var(--primary); margin-top: 10px; }
 .how-text ol { list-style: none; padding: 0; margin: 0; }
