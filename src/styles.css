@@ -138,3 +138,12 @@
 }
 
 @media (min-width: 641px) and (max-width: 1024px) { .our-lady { height: 280px; opacity: .45; right: 20px; } .cirio-sash { width: 280px; bottom: 60px; } .scene-rope { width: 220px; left: 24px; bottom: 60px; } }
+
+/* Cover-only layout: Our Lady on the left, enter button on the right above the sash */
+.is-cover .our-lady { right: auto; left: clamp(40px, 8vw, 160px); }
+.cover-enter { left: auto; right: clamp(40px, 7%, 120px); bottom: clamp(150px, 24%, 230px); }
+@media (min-width: 641px) and (max-width: 1024px) { .is-cover .our-lady { left: 20px; } }
+@media (max-width: 760px) {
+  .is-cover .our-lady { left: 12px; right: auto; }
+  .cover-enter { left: 50%; right: auto; bottom: 240px; }
+}

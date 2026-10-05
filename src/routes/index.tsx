@@ -248,7 +248,7 @@ function Catalog() {
   }, [goTo, page]);
 
   return (
-    <main className="catalog-shell">
+    <main className={`catalog-shell ${page === 0 ? "is-cover" : ""}`}>
       <OurLadyLineArt />
       <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1536} height={768} /></div>
       <GreenRibbon />
