@@ -14,6 +14,7 @@ import amarelo from "@/assets/p-terco-amarelo.jpg";
 import vermelho from "@/assets/p-terco-vermelho.jpg";
 import imagemGrande from "@/assets/p-imagem-grande.jpg";
 import imagemPequena from "@/assets/p-imagem-pequena.jpg";
+import cordaCirio from "@/assets/corda-cirio.jpg.asset.json";
 
 type Product = {
   name: string;
@@ -252,7 +253,8 @@ function Catalog() {
   }, [goTo, page]);
 
   return (
-    <main className={`catalog-shell ${page === 0 ? "is-cover" : ""}`}>
+    <>
+    <main id="top" className={`catalog-shell ${page === 0 ? "is-cover" : ""}`}>
       <OurLadyLineArt />
       {SHOW_COVER_ROPE && page === 0 && <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1007} height={672} /></div>}
       {page === 0 && <GreenRibbon />}
@@ -304,5 +306,41 @@ function Catalog() {
 
       <a className="fixed-instagram" href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" aria-label="Instagram da Via da Graça"><Instagram size={20} /><span>@viadagraca._</span></a>
     </main>
+    {page === 0 && <HomeExtras />}
+    </>
+  );
+}
+
+const steps = [
+  ["01", "Escolha com calma", "Folheie o catálogo e encontre as peças que falam ao seu coração."],
+  ["02", "Converse com a artesã", "Toque em “Pedir no WhatsApp” e conte quais peças você deseja."],
+  ["03", "Receba em Belém", "Combinamos entrega ou retirada e o pagamento acontece no recebimento."],
+] as const;
+
+function HomeExtras() {
+  return (
+    <>
+      <section id="como-funciona" className="how-section">
+        <div className="how-grid">
+          <div className="how-text">
+            <p className="catalog-kicker">Da escolha ao encontro</p>
+            <h2>Um atendimento próximo, como deve ser.</h2>
+            <div className="gold-rule" />
+            <ol>
+              {steps.map(([n, t, d]) => <li key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div></li>)}
+            </ol>
+          </div>
+          <div className="how-photo"><img src={cordaCirio.url} alt="Mãos unidas segurando a corda do Círio de Nazaré" loading="lazy" /></div>
+        </div>
+      </section>
+      <footer className="site-footer">
+        <div className="footer-grid">
+          <div><img src={logo} alt="Via da Graça" className="footer-logo" /><p>Terços, pulseiras e artigos devocionais feitos artesanalmente em Belém do Pará.</p></div>
+          <div><p className="footer-heading">Visite</p><a href="#top">Catálogo</a><a href="#como-funciona">Como funciona</a></div>
+          <div><p className="footer-heading">Acompanhe</p><a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer"><Instagram size={16} /> @viadagraca._</a><a href={whatsappUrl("uma peça da coleção")} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Falar com a artesã</a></div>
+        </div>
+        <div className="footer-bottom"><span>© 2026 Via da Graça. Feito com fé.</span><span>Atendimento em Belém-PA</span></div>
+      </footer>
+    </>
   );
 }
