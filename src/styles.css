@@ -156,7 +156,7 @@
 @media (max-width: 640px) { .bar-menu > a.bar-cta span { display: none; } .bar-menu > a.bar-cta { padding: 8px; } }
 
 /* Product photos: show the whole piece, never crop */
-.photo-frame { display: flex; align-items: center; justify-content: center; background: var(--paper-deep); }
+.photo-frame { display: flex; align-items: center; justify-content: center; background: color-mix(in oklab, var(--gold) 10%, var(--paper)); }
 .photo-frame > img { object-fit: contain; padding: 12px; }
 .detail-page { padding: 40px 48px 32px; overflow-y: auto; }
 .detail-page h2 { font-size: clamp(36px, 3.6vw, 56px); }
