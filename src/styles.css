@@ -141,7 +141,7 @@
 
 /* Cover-only layout: Our Lady on the left, enter button on the right above the sash */
 .is-cover .our-lady { right: auto; left: clamp(40px, 8vw, 160px); }
-.cover-enter { left: auto; right: clamp(40px, 7%, 120px); bottom: clamp(150px, 24%, 230px); }
+.cover-enter { left: auto; right: clamp(40px, 7%, 120px); bottom: clamp(70px, 11%, 110px); }
 @media (min-width: 641px) and (max-width: 1024px) { .is-cover .our-lady { left: 20px; } }
 @media (max-width: 760px) {
   .is-cover .our-lady { left: 12px; right: auto; }
