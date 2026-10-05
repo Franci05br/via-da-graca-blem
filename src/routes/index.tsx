@@ -183,12 +183,8 @@ function Cover({ onEnter }: { onEnter: () => void }) {
         <p className="cover-edition">Catálogo artesanal · Belém do Pará</p>
         <img src={logo} alt="Via da Graça — Feito com Fé" className="cover-logo" />
         <p className="cover-tagline">Pequenos símbolos.<br />Grandes histórias.</p>
-        <div className="cover-links">
-          <a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer"><Instagram size={16} /> @viadagraca._</a>
-          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Consultar coleção</a>
-        </div>
+        <button type="button" className="cover-enter" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       </div>
-      <button type="button" className="cover-enter" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       <p className="cover-instruction">Arraste ou use as setas para folhear</p>
     </section>
   );
@@ -258,7 +254,7 @@ function Catalog() {
       <header className="catalog-bar">
         <button type="button" className="bar-logo" onClick={() => { goTo(0); setMenuOpen(false); }} aria-label="Voltar à capa"><img src={logo} alt="Via da Graça" /></button>
         <nav className="bar-menu" aria-label="Menu">
-          <button type="button" onClick={() => { goTo(0); setMenuOpen(false); }}>Home</button>
+          <button type="button" className="hide-sm" onClick={() => { goTo(0); setMenuOpen(false); }}>Home</button>
           <div className="menu-item">
             <button type="button" onClick={() => setMenuOpen((v) => !v)} aria-expanded={menuOpen}>Coleção</button>
             {menuOpen && (
@@ -269,9 +265,9 @@ function Catalog() {
           </div>
           <button type="button" onClick={() => { setAboutOpen(true); setMenuOpen(false); }}>Sobre</button>
           <a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" aria-label="Instagram da Via da Graça"><Instagram size={18} /></a>
-          <a className="bar-cta" href={whatsappUrl("uma peça da coleção")} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Falar com a artesã</span></a>
         </nav>
         <div className="bar-actions">
+          <a className="bar-cta hide-sm" href={whatsappUrl("uma peça da coleção")} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Falar com a artesã</span></a>
           <span className="hide-sm">{String(page + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span>
           <Button variant="ghost" size="icon" onClick={() => setSoundOn((value) => !value)} aria-label={soundOn ? "Desativar som de página" : "Ativar som de página"}>{soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}</Button>
         </div>

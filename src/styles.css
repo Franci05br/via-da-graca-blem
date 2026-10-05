@@ -173,3 +173,7 @@
 .bar-logo { padding: 0; border: 0; background: none; cursor: pointer; display: flex; }
 .bar-logo img { width: 132px; height: 48px; object-fit: contain; object-position: left center; }
 @media (max-width: 760px) { .bar-logo img { width: 104px; } }
+.bar-actions > a.bar-cta { display: inline-flex; align-items: center; gap: 8px; margin-right: 10px; padding: 9px 16px; border-radius: 2px; background: var(--primary); color: var(--primary-foreground); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; text-decoration: none; }
+.bar-actions > a.bar-cta:hover { opacity: .88; }
+.cover-content .cover-enter { position: static; transform: none; margin-top: 32px; align-self: center; }
+@media (max-width: 760px) { .bar-actions > a.bar-cta.hide-sm, .bar-menu > .hide-sm { display: none; } .cover-content .cover-enter { margin-top: 26px; } }
