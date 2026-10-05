@@ -250,13 +250,13 @@ function Catalog() {
   return (
     <main className={`catalog-shell ${page === 0 ? "is-cover" : ""}`}>
       <OurLadyLineArt />
-      <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1792} height={768} /></div>
-      <GreenRibbon />
+      {page === 0 && <div className="scene-rope" aria-hidden="true"><img src={corda} alt="" width={1007} height={672} /></div>}
+      {page === 0 && <GreenRibbon />}
       <header className="catalog-bar">
         <img src={logo} alt="Via da Graça" />
         <nav className="bar-menu" aria-label="Menu">
           <div className="menu-item">
-            <button type="button" onClick={() => setMenuOpen((v) => !v)} aria-expanded={menuOpen}>Categorias</button>
+            <button type="button" onClick={() => setMenuOpen((v) => !v)} aria-expanded={menuOpen}>Coleção</button>
             {menuOpen && (
               <div className="menu-dropdown">
                 {categories.map((c) => <button key={c.label} type="button" onClick={() => { goTo(c.page); setMenuOpen(false); }}>{c.label}</button>)}
@@ -264,7 +264,8 @@ function Catalog() {
             )}
           </div>
           <button type="button" onClick={() => { setAboutOpen(true); setMenuOpen(false); }}>Sobre</button>
-          <a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={16} /><span className="hide-sm">@viadagraca._</span></a>
+          <a href="https://www.instagram.com/viadagraca._" target="_blank" rel="noreferrer" aria-label="Instagram da Via da Graça"><Instagram size={18} /></a>
+          <a className="bar-cta" href={whatsappUrl("uma peça da coleção")} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Fale com a artesã</span></a>
         </nav>
         <div className="bar-actions">
           <span className="hide-sm">{String(page + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span>
