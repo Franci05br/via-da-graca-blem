@@ -186,3 +186,30 @@
   .is-cover .our-lady { top: 70px; height: 140px; opacity: .2; }
   .cirio-sash { bottom: 150px; }
 }
+
+/* Home: Como funciona + footer */
+.catalog-shell { position: relative; }
+.our-lady, .cirio-sash { position: absolute; }
+.how-section { background: #fff; border-top: 1px solid color-mix(in oklab, var(--gold) 35%, transparent); padding: clamp(64px, 9vw, 120px) 24px; }
+.how-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 88px); align-items: center; }
+.how-text h2 { font-family: var(--font-display); font-size: clamp(30px, 3.4vw, 44px); line-height: 1.1; color: var(--primary); margin-top: 10px; }
+.how-text ol { list-style: none; padding: 0; margin: 0; }
+.how-text li { display: grid; grid-template-columns: 3rem 1fr; gap: 16px; border-top: 1px solid color-mix(in oklab, var(--primary) 14%, transparent); padding: 22px 0; }
+.how-text li span { font-family: var(--font-display); font-size: 24px; color: var(--gold); }
+.how-text h3 { font-family: var(--font-display); font-size: 20px; color: var(--primary); }
+.how-text li p { margin-top: 6px; font-size: 14px; line-height: 1.65; color: var(--muted-foreground); }
+.how-photo { aspect-ratio: 4 / 5; overflow: hidden; border-radius: 2px; box-shadow: 0 0 0 1px color-mix(in oklab, var(--gold) 30%, transparent), 18px 18px 0 -1px color-mix(in oklab, var(--primary) 8%, transparent); }
+.how-photo img { width: 100%; height: 100%; object-fit: cover; }
+.site-footer { background: var(--primary); color: var(--primary-foreground); padding: 56px 24px 28px; }
+.footer-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 40px; }
+.footer-logo { height: 84px; width: auto; filter: brightness(0) invert(1); }
+.footer-grid p:not(.footer-heading) { margin-top: 16px; max-width: 320px; font-size: 14px; line-height: 1.65; color: color-mix(in oklab, var(--primary-foreground) 70%, transparent); }
+.footer-heading { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 14px; }
+.footer-grid a { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 14px; color: inherit; text-decoration: none; }
+.footer-grid a:hover { color: var(--gold-text); }
+.footer-bottom { max-width: 1120px; margin: 40px auto 0; padding-top: 20px; border-top: 1px solid color-mix(in oklab, var(--primary-foreground) 15%, transparent); display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: color-mix(in oklab, var(--primary-foreground) 55%, transparent); }
+@media (max-width: 760px) {
+  .how-grid, .footer-grid { grid-template-columns: 1fr; }
+  .how-photo { aspect-ratio: 4 / 3; }
+  .footer-bottom { flex-direction: column; }
+}
