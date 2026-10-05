@@ -74,7 +74,7 @@
 .cover-links a, .back-instagram { display: inline-flex; align-items: center; gap: 7px; color: var(--primary); font-size: 11px; font-weight: 700; text-transform: uppercase; text-decoration: none; }
 .cover-instruction { position: absolute; z-index: 4; bottom: 22px; left: 50%; margin: 0; transform: translateX(-50%); color: var(--muted-foreground); font-size: 10px; text-transform: uppercase; letter-spacing: .14em; white-space: nowrap; }
 .scene-rope { position: fixed; z-index: 3; left: -60px; top: 58vh; width: min(32vw, 440px); height: auto; transform: rotate(24deg); transform-origin: left center; pointer-events: none; opacity: .95; }
-.scene-rope img { width: 100%; height: auto; max-width: none; filter: drop-shadow(4px 6px 6px color-mix(in oklab, var(--foreground) 18%, transparent)); }
+.scene-rope img { width: 100%; height: auto; max-width: none; -webkit-mask-image: linear-gradient(to right, #000 70%, transparent 98%); mask-image: linear-gradient(to right, #000 70%, transparent 98%); filter: drop-shadow(4px 6px 6px color-mix(in oklab, var(--foreground) 18%, transparent)); }
 .cirio-sash { position: fixed; z-index: 3; right: clamp(16px, 3vw, 56px); bottom: clamp(70px, 12vh, 130px); width: clamp(240px, 28vw, 400px); transform: rotate(-2deg); transform-origin: right center; filter: drop-shadow(0 6px 8px color-mix(in oklab, var(--foreground) 14%, transparent)); pointer-events: none; animation: sash-float 7s ease-in-out infinite; }
 @keyframes sash-float { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(-1.2deg) translateY(-3px); } }
 .cirio-sash .sash-body { fill: var(--sash-green); }
