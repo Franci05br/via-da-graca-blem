@@ -151,6 +151,6 @@
 @media (max-width: 760px) { .scene-rope { width: 190px; left: 6px; } }
 .scene-rope { width: clamp(190px, 19vw, 320px); }
 @media (max-width: 760px) { .scene-rope { width: 120px; } }
-.bar-cta { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: var(--primary); color: var(--primary-foreground) !important; font-size: .78rem; letter-spacing: .04em; white-space: nowrap; }
-.bar-cta:hover { opacity: .9; }
-@media (max-width: 640px) { .bar-cta span { display: none; } .bar-cta { padding: 7px; } }
+.bar-menu > a.bar-cta { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 0; border-radius: 2px; background: var(--primary); color: var(--primary-foreground); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; transition: opacity 180ms ease; }
+.bar-menu > a.bar-cta:hover { opacity: .88; border-color: transparent; }
+@media (max-width: 640px) { .bar-menu > a.bar-cta span { display: none; } .bar-menu > a.bar-cta { padding: 8px; } }
