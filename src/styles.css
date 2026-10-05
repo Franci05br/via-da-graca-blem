@@ -170,3 +170,6 @@
   .photo-frame > img { padding: 8px; }
   .detail-page { overflow: visible; padding: 32px 28px 90px; }
 }
+.bar-logo { padding: 0; border: 0; background: none; cursor: pointer; display: flex; }
+.bar-logo img { width: 132px; height: 48px; object-fit: contain; object-position: left center; }
+@media (max-width: 760px) { .bar-logo img { width: 104px; } }
