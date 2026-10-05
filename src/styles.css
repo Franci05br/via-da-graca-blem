@@ -77,7 +77,7 @@
 .cover-enter svg { transition: transform 200ms ease; } .cover-enter:hover svg { transform: translateX(3px); }
 .on-cover .page-arrow-right { opacity: 0; pointer-events: none; }
 .cover-instruction { position: absolute; z-index: 4; bottom: 22px; left: 50%; margin: 0; transform: translateX(-50%); color: var(--muted-foreground); font-size: 10px; text-transform: uppercase; letter-spacing: .14em; white-space: nowrap; }
-.scene-rope { position: fixed; z-index: 3; left: -40px; bottom: 200px; width: min(38vw, 560px); height: auto; transform: rotate(40deg); transform-origin: left center; pointer-events: none; }
+.scene-rope { position: fixed; z-index: 3; left: -50px; bottom: 150px; width: min(30vw, 440px); height: auto; transform: rotate(55deg); transform-origin: left center; pointer-events: none; }
 .scene-rope img { display: block; width: 100%; height: auto; max-width: none; }
 .cirio-sash { position: fixed; z-index: 3; right: clamp(16px, 3vw, 56px); bottom: clamp(70px, 12vh, 130px); width: clamp(240px, 28vw, 400px); transform: rotate(-2deg); transform-origin: right center; filter: drop-shadow(0 6px 8px color-mix(in oklab, var(--foreground) 14%, transparent)); pointer-events: none; animation: sash-float 7s ease-in-out infinite; }
 @keyframes sash-float { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(-1.2deg) translateY(-3px); } }
