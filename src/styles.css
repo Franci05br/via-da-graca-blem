@@ -213,4 +213,5 @@
   .how-photo { aspect-ratio: 4 / 3; }
   .footer-bottom { flex-direction: column; }
 }
-.cover-page { background: #ffffff; } /* teste: fundo da capa em branco puro (anterior: var(--paper)) */
+/* teste: capa e container ao redor em branco puro (anterior: var(--paper)) */
+.cover-page, .catalog-shell.is-cover, .catalog-shell.is-cover .magazine-page { background: #ffffff; }
