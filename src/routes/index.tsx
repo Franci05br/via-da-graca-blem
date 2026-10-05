@@ -172,7 +172,7 @@ function ProductPage({ product, number }: { product: Product; number: number }) 
   );
 }
 
-function Cover() {
+function Cover({ onEnter }: { onEnter: () => void }) {
   return (
     <section className="cover-page">
       <BasilicaLineArt />
@@ -185,6 +185,7 @@ function Cover() {
           <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Consultar coleção</a>
         </div>
       </div>
+      <button type="button" className="cover-enter" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       <p className="cover-instruction">Arraste ou use as setas para folhear</p>
     </section>
   );
@@ -283,9 +284,9 @@ function Catalog() {
         </div>
       )}
 
-      <div className="magazine-stage" onTouchStart={(event) => { touchStart.current = event.touches[0]?.clientX ?? null; }} onTouchEnd={(event) => { const start = touchStart.current; const end = event.changedTouches[0]?.clientX; if (start !== null && end !== undefined && Math.abs(end - start) > 45) goTo(end < start ? page + 1 : page - 1); touchStart.current = null; }}>
+      <div className={`magazine-stage ${page === 0 ? "on-cover" : ""}`} onTouchStart={(event) => { touchStart.current = event.touches[0]?.clientX ?? null; }} onTouchEnd={(event) => { const start = touchStart.current; const end = event.changedTouches[0]?.clientX; if (start !== null && end !== undefined && Math.abs(end - start) > 45) goTo(end < start ? page + 1 : page - 1); touchStart.current = null; }}>
         <div key={page} className={`magazine-page flip-${direction}`}>
-          {page === 0 ? <Cover /> : page === totalPages - 1 ? <BackCover /> : <ProductPage product={products[page - 1]!} number={page} />}
+          {page === 0 ? <Cover onEnter={() => goTo(1)} /> : page === totalPages - 1 ? <BackCover /> : <ProductPage product={products[page - 1]!} number={page} />}
         </div>
         <button className="page-arrow page-arrow-left" type="button" onClick={() => goTo(page - 1)} disabled={page === 0} aria-label="Página anterior"><ArrowLeft /></button>
         <button className="page-arrow page-arrow-right" type="button" onClick={() => goTo(page + 1)} disabled={page === totalPages - 1} aria-label="Próxima página"><ArrowRight /></button>

@@ -47,7 +47,7 @@
 }
 
 .catalog-shell { min-height: 100svh; overflow: hidden; background: var(--paper); padding: 112px 24px 28px; }
-.catalog-bar { position: fixed; inset: 0 0 auto; z-index: 40; height: 64px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid color-mix(in oklab, var(--border) 65%, transparent); background: color-mix(in oklab, var(--background) 92%, transparent); padding: 0 28px; backdrop-filter: blur(14px); }
+.catalog-bar { position: fixed; inset: 0 0 auto; z-index: 40; height: 64px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid color-mix(in oklab, var(--border) 65%, transparent); background: color-mix(in oklab, var(--background) 92%, transparent); padding: 0 clamp(28px, 6vw, 120px); backdrop-filter: blur(14px); }
 .catalog-bar > img { width: 132px; height: 48px; object-fit: contain; object-position: left center; }
 .bar-actions { display: flex; align-items: center; gap: 12px; color: var(--muted-foreground); font-size: 11px; font-weight: 700; }
 .magazine-stage { position: relative; width: min(1120px, calc(100vw - 112px)); height: min(700px, calc(100svh - 180px)); min-height: 580px; margin: 0 auto; perspective: 2200px; }
@@ -65,16 +65,20 @@
 .page-dots button.active { width: 38px; background: var(--primary); }
 
 .cover-page, .back-cover { position: relative; height: 100%; isolation: isolate; overflow: hidden; background: var(--paper); }
-.basilica-line { position: absolute; z-index: -1; left: 50%; bottom: -8%; width: min(78%, 850px); transform: translateX(-50%); color: color-mix(in oklab, var(--gold) 22%, transparent); }
+.basilica-line { position: absolute; z-index: -1; left: 50%; bottom: -8%; width: min(62%, 700px); transform: translateX(-50%); color: color-mix(in oklab, var(--gold) 22%, transparent); }
 .cover-content { position: relative; z-index: 3; display: flex; height: 100%; flex-direction: column; align-items: center; justify-content: center; padding: 52px 90px 90px; text-align: center; }
 .cover-edition, .catalog-kicker { margin: 0 0 22px; color: var(--primary); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .22em; }
 .cover-logo { width: min(420px, 48vw); max-height: 180px; object-fit: contain; }
 .cover-tagline { margin: 28px 0 0; font-family: var(--font-display); font-size: clamp(32px, 4vw, 56px); font-weight: 600; line-height: .98; color: var(--primary); }
 .cover-links { display: flex; gap: 24px; margin-top: 38px; }
 .cover-links a, .back-instagram { display: inline-flex; align-items: center; gap: 7px; color: var(--primary); font-size: 11px; font-weight: 700; text-transform: uppercase; text-decoration: none; }
+.cover-enter { position: absolute; z-index: 4; right: clamp(24px, 5%, 64px); bottom: 64px; display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: background 200ms ease, color 200ms ease; }
+.cover-enter:hover { background: var(--primary); color: var(--primary-foreground); }
+.cover-enter svg { transition: transform 200ms ease; } .cover-enter:hover svg { transform: translateX(3px); }
+.on-cover .page-arrow-right { opacity: 0; pointer-events: none; }
 .cover-instruction { position: absolute; z-index: 4; bottom: 22px; left: 50%; margin: 0; transform: translateX(-50%); color: var(--muted-foreground); font-size: 10px; text-transform: uppercase; letter-spacing: .14em; white-space: nowrap; }
-.scene-rope { position: fixed; z-index: 3; left: -60px; top: 58vh; width: min(32vw, 440px); height: auto; transform: rotate(24deg); transform-origin: left center; pointer-events: none; opacity: .95; }
-.scene-rope img { width: 100%; height: auto; max-width: none; -webkit-mask-image: linear-gradient(to right, #000 70%, transparent 98%); mask-image: linear-gradient(to right, #000 70%, transparent 98%); filter: drop-shadow(4px 6px 6px color-mix(in oklab, var(--foreground) 18%, transparent)); }
+.scene-rope { position: fixed; z-index: 3; left: -90px; bottom: -70px; width: min(36vw, 500px); height: auto; transform: rotate(34deg); transform-origin: left center; pointer-events: none; }
+.scene-rope img { display: block; width: 100%; height: auto; max-width: none; }
 .cirio-sash { position: fixed; z-index: 3; right: clamp(16px, 3vw, 56px); bottom: clamp(70px, 12vh, 130px); width: clamp(240px, 28vw, 400px); transform: rotate(-2deg); transform-origin: right center; filter: drop-shadow(0 6px 8px color-mix(in oklab, var(--foreground) 14%, transparent)); pointer-events: none; animation: sash-float 7s ease-in-out infinite; }
 @keyframes sash-float { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(-1.2deg) translateY(-3px); } }
 .cirio-sash .sash-body { fill: var(--sash-green); }
@@ -122,7 +126,7 @@
   .magazine-page { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--paper); transform-style: preserve-3d; transform-origin: center right; }
   .page-arrow { position: fixed; top: auto; bottom: 12px; width: 40px; height: 40px; }.page-arrow-left { left: 14px; }.page-arrow-right { right: 14px; }
   .page-dots { position: fixed; z-index: 30; bottom: 29px; left: 50%; max-width: calc(100vw - 130px); transform: translateX(-50%); gap: 5px; }.page-dots button { width: 9px; }.page-dots button.active { width: 20px; }
-  .cover-page, .back-cover { min-height: calc(100svh - 120px); }.cover-content { padding: 44px 24px 100px; }.cover-logo { width: min(320px, 78vw); }.cover-links { flex-direction: column; gap: 14px; }.scene-rope { width: 200px; top: 80vh; left: -50px; opacity: .75; } .cirio-sash { width: 220px; right: 8px; bottom: 104px; }
+  .cover-page, .back-cover { min-height: calc(100svh - 120px); }.cover-content { padding: 44px 24px 100px; }.cover-logo { width: min(320px, 78vw); }.cover-links { flex-direction: column; gap: 14px; }.scene-rope { width: 210px; left: -60px; bottom: -40px; } .cover-enter { position: static; margin-top: 26px; } .cirio-sash { width: 220px; right: 8px; bottom: 104px; }
   .product-spread { min-height: calc(100svh - 120px); grid-template-columns: 1fr; grid-template-rows: 54svh auto; }
   .photo-page { padding: 10px 10px 0; border-right: 0; border-bottom: 1px solid var(--border); }.thumbnail-row { height: 64px; }.thumb { width: 42px; height: 50px; }
   .detail-page { justify-content: flex-start; padding: 35px 28px 46px; }.detail-page h2 { font-size: 44px; }.product-copy { font-size: 19px; }.detail-page ul { margin-top: 18px; }.price-block { margin-top: 20px; }
@@ -133,4 +137,4 @@
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
-@media (min-width: 641px) and (max-width: 1024px) { .our-lady { height: 280px; opacity: .45; right: 20px; } .cirio-sash { width: 280px; bottom: 60px; } .scene-rope { width: 320px; top: 68vh; left: -60px; } }
+@media (min-width: 641px) and (max-width: 1024px) { .our-lady { height: 280px; opacity: .45; right: 20px; } .cirio-sash { width: 280px; bottom: 60px; } .scene-rope { width: 300px; left: -70px; bottom: -50px; } }
