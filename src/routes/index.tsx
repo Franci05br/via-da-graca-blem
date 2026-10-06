@@ -382,3 +382,17 @@ function SiteFooter() {
       </footer>
   );
 }
+
+function alignToHeaderCta(btn: HTMLButtonElement | null) {
+  if (!btn || typeof window === "undefined") return;
+  const place = () => {
+    const cta = document.querySelector<HTMLElement>("a.bar-cta");
+    const box = btn.offsetParent as HTMLElement | null;
+    if (!cta || !box || window.innerWidth < 1025) { btn.style.removeProperty("right"); return; }
+    const c = cta.getBoundingClientRect(); const b = box.getBoundingClientRect();
+    const right = Math.max(24, b.right - c.right);
+    btn.style.right = `${Math.min(right, b.width - btn.offsetWidth - 24)}px`;
+  };
+  place(); requestAnimationFrame(place);
+  window.addEventListener("resize", place);
+}
