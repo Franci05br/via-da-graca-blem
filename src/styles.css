@@ -211,6 +211,9 @@
 @media (max-width: 760px) {
   .how-grid, .footer-grid { grid-template-columns: 1fr; }
   .how-photo { aspect-ratio: 4 / 3; }
+  .how-section { padding-top: 32px; }
+  .how-grid { gap: 28px; }
+  .how-art { order: -1; margin: 0 -24px; }
   .footer-bottom { flex-direction: column; }
 }
 /* teste: capa e container ao redor em branco puro (anterior: var(--paper)) */
