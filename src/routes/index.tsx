@@ -15,6 +15,7 @@ import vermelho from "@/assets/p-terco-vermelho.jpg";
 import imagemGrande from "@/assets/p-imagem-grande.jpg";
 import imagemPequena from "@/assets/p-imagem-pequena.jpg";
 import cordaCirio from "@/assets/corda-cirio.jpg.asset.json";
+import cordaGravura from "@/assets/corda-gravura.jpg";
 
 type Product = {
   name: string;
@@ -364,6 +365,7 @@ function HowSection() {
               {steps.map(([n, t, d]) => <li key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div></li>)}
             </ol>
           </div>
+          <div className="how-band" aria-hidden="true"><img src={cordaGravura} alt="" width={1792} height={440} loading="lazy" /></div>
           <div className="how-photo"><img src={cordaCirio.url} alt="Mãos unidas segurando a corda do Círio de Nazaré" loading="lazy" /></div>
         </div>
       </section>
