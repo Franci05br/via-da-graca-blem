@@ -190,7 +190,7 @@ function Cover({ onEnter }: { onEnter: () => void }) {
         </div>
         <button type="button" className="cover-enter cover-enter-sm" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       </div>
-      <button type="button" className="cover-enter cover-enter-lg" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
+      <button type="button" ref={alignToHeaderCta} className="cover-enter cover-enter-lg" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       <p className="cover-instruction">Arraste ou use as setas para folhear</p>
     </section>
   );
@@ -381,4 +381,18 @@ function SiteFooter() {
         <div className="footer-bottom"><span>© 2026 Via da Graça. Feito com fé.</span><span>Atendimento em Belém-PA</span></div>
       </footer>
   );
+}
+
+function alignToHeaderCta(btn: HTMLButtonElement | null) {
+  if (!btn || typeof window === "undefined") return;
+  const place = () => {
+    const cta = document.querySelector<HTMLElement>("a.bar-cta");
+    const box = btn.offsetParent as HTMLElement | null;
+    if (!cta || !box || window.innerWidth < 1025) { btn.style.removeProperty("right"); return; }
+    const c = cta.getBoundingClientRect(); const b = box.getBoundingClientRect();
+    const right = Math.max(24, b.right - c.right);
+    btn.style.right = `${Math.min(right, b.width - btn.offsetWidth - 24)}px`;
+  };
+  place(); requestAnimationFrame(place);
+  window.addEventListener("resize", place);
 }
