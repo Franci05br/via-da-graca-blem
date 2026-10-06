@@ -14,7 +14,7 @@ import amarelo from "@/assets/p-terco-amarelo.jpg";
 import vermelho from "@/assets/p-terco-vermelho.jpg";
 import imagemGrande from "@/assets/p-imagem-grande.jpg";
 import imagemPequena from "@/assets/p-imagem-pequena.jpg";
-import cordaCirio from "@/assets/corda-cirio.jpg.asset.json";
+import cirioArt from "@/assets/cirio-berlinda.png.asset.json";
 
 type Product = {
   name: string;
@@ -364,7 +364,7 @@ function HowSection() {
               {steps.map(([n, t, d]) => <li key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div></li>)}
             </ol>
           </div>
-          <div className="how-photo"><img src={cordaCirio.url} alt="Mãos unidas segurando a corda do Círio de Nazaré" loading="lazy" /></div>
+          <div className="how-photo how-art"><img src={cirioArt.url} alt="Mãos unidas na corda do Círio diante da Berlinda de Nossa Senhora de Nazaré" loading="lazy" /></div>
         </div>
       </section>
   );
