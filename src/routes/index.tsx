@@ -302,7 +302,7 @@ function Catalog() {
         </div>
       )}
 
-      <div className={`magazine-stage ${page === 0 ? "on-cover" : ""}`} onTouchStart={(event) => { touchStart.current = event.touches[0]?.clientX ?? null; }} onTouchEnd={(event) => { const start = touchStart.current; const end = event.changedTouches[0]?.clientX; if (start !== null && end !== undefined && Math.abs(end - start) > 45) goTo(end < start ? page + 1 : page - 1); touchStart.current = null; }}>
+      <div className={`magazine-stage ${page === 0 ? "on-cover" : ""}`} onTouchStart={(event) => { const onPhoto = (event.target as HTMLElement).closest(".photo-frame"); if (window.innerWidth <= 760 && page > 0 && !onPhoto) { touchStart.current = null; return; } touchStart.current = event.touches[0]?.clientX ?? null; }} onTouchEnd={(event) => { const start = touchStart.current; const end = event.changedTouches[0]?.clientX; if (start !== null && end !== undefined && Math.abs(end - start) > 45) goTo(end < start ? page + 1 : page - 1); touchStart.current = null; }}>
         <div key={page} className={`magazine-page flip-${direction}`}>
           {page === 0 ? <Cover onEnter={() => goTo(1)} /> : page === totalPages - 1 ? <BackCover /> : <ProductPage product={products[page - 1]!} number={page} />}
         </div>
