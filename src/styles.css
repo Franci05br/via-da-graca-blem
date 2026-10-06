@@ -227,8 +227,12 @@
 @media (min-width: 761px) { .page-arrow { top: auto; bottom: 90px; } }
 /* Mobile: page controls sit at the end of the content, not floating */
 @media (max-width: 760px) {
-  .magazine-stage { padding-bottom: 64px; }
-  .page-arrow { position: absolute; bottom: 12px; }
-  .page-dots { position: relative; z-index: 16; bottom: auto; left: auto; transform: none; margin: -40px auto 0; padding-top: 0; height: 40px; align-items: center; }
-  .catalog-shell { padding-bottom: 16px; }
+  .page-dots { display: none !important; }
+  .magazine-stage { padding-bottom: 72px; }
+  .magazine-stage.on-cover { padding-bottom: 0; }
+  .magazine-stage.on-cover .page-arrow { display: none; }
+  .page-arrow { position: absolute; top: auto; bottom: 16px; width: 44px; height: 44px; }
+  .page-arrow-left { left: calc(50% - 56px); right: auto; }
+  .page-arrow-right { right: calc(50% - 56px); left: auto; }
+  .catalog-shell { padding-bottom: 40px; }
 }
