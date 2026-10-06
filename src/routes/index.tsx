@@ -190,7 +190,7 @@ function Cover({ onEnter }: { onEnter: () => void }) {
         </div>
         <button type="button" className="cover-enter cover-enter-sm" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       </div>
-      <button type="button" className="cover-enter cover-enter-lg" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
+      <button type="button" ref={alignToHeaderCta} className="cover-enter cover-enter-lg" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       <p className="cover-instruction">Arraste ou use as setas para folhear</p>
     </section>
   );
