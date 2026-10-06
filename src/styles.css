@@ -236,3 +236,9 @@
   .page-arrow-right { right: calc(50% - 56px); left: auto; }
   .catalog-shell { padding-bottom: 40px; }
 }
+.how-band { display: none; }
+@media (max-width: 760px) {
+  .how-band { display: block; order: -1; margin: 0 -24px; }
+  .how-band img { width: 100%; height: auto; display: block; }
+  .how-photo { display: none; }
+}
