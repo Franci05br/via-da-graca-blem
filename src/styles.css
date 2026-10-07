@@ -252,3 +252,16 @@
   /* Basílica como fundo desde o topo da capa */
   .basilica-line { top: 64px; bottom: auto; width: 128%; height: 74%; color: color-mix(in oklab, var(--gold) 34%, transparent); }
 }
+
+/* Fita: texto direto no tecido, tom marfim */
+.sash-text { fill: oklch(.95 .02 90); font-style: normal; font-weight: 500; letter-spacing: .04em; }
+.cirio-sash { filter: drop-shadow(0 3px 4px color-mix(in oklab, var(--foreground) 10%, transparent)); }
+@media (max-width: 760px) { .cirio-sash { bottom: 84px; } }
+/* Fotos: fundo do card preenchido com a própria textura da foto */
+.photo-frame { position: relative; background: var(--paper); }
+.photo-frame > img { position: relative; z-index: 1; }
+.photo-frame > img.photo-bg { position: absolute; inset: 0; z-index: 0; object-fit: cover; filter: blur(28px) saturate(.9); transform: scale(1.2); opacity: .95; animation: none; }
+.how-art, .how-art img { background: transparent; }
+@media (max-width: 760px) { .cirio-sash { bottom: 128px; } }
+.photo-frame > img.photo-bg { filter: blur(48px) saturate(.25) brightness(1.04); transform: scale(1.4); }
+.photo-frame > img { padding: 0 !important; -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 62%, transparent 100%); }

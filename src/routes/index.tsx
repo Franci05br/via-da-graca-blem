@@ -14,7 +14,8 @@ import amarelo from "@/assets/p-terco-amarelo.jpg";
 import vermelho from "@/assets/p-terco-vermelho.jpg";
 import imagemGrande from "@/assets/p-imagem-grande.jpg";
 import imagemPequena from "@/assets/p-imagem-pequena.jpg";
-import cirioArt from "@/assets/cirio-berlinda.png.asset.json";
+import cirioArtUrl from "@/assets/cirio-berlinda.png";
+const cirioArt = { url: cirioArtUrl };
 
 type Product = {
   name: string;
@@ -118,24 +119,28 @@ function GreenRibbon() {
     <svg className="cirio-sash" viewBox="0 0 420 120" aria-hidden="true">
       <defs>
         <linearGradient id="satin" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="oklch(.5 .1 160)" />
-          <stop offset=".35" stopColor="oklch(.44 .095 160)" />
-          <stop offset=".7" stopColor="oklch(.36 .085 160)" />
-          <stop offset="1" stopColor="oklch(.3 .07 160)" />
+          <stop offset="0" stopColor="oklch(.46 .1 155)" />
+          <stop offset=".5" stopColor="oklch(.43 .1 155)" />
+          <stop offset="1" stopColor="oklch(.38 .09 155)" />
         </linearGradient>
         <linearGradient id="satinDark" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="oklch(.28 .07 160)" />
-          <stop offset="1" stopColor="oklch(.38 .085 160)" />
+          <stop offset="0" stopColor="oklch(.33 .08 155)" />
+          <stop offset="1" stopColor="oklch(.39 .09 155)" />
         </linearGradient>
+        <filter id="weave" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency=".9 .25" numOctaves="2" seed="3" result="n" />
+          <feColorMatrix in="n" type="saturate" values="0" result="g" />
+          <feComponentTransfer in="g" result="t"><feFuncA type="linear" slope=".18" /></feComponentTransfer>
+          <feComposite in="t" in2="SourceGraphic" operator="in" result="tx" />
+          <feBlend in="SourceGraphic" in2="tx" mode="multiply" />
+        </filter>
       </defs>
-      {/* left tail with V-cut, curling down */}
-      <path d="M78 46 C58 50 40 66 24 84 L6 98 L30 96 L18 116 C40 100 58 82 82 74 Z" fill="url(#satinDark)" />
-      {/* right tail curling up */}
-      <path d="M346 30 C368 26 386 14 400 4 L414 6 L402 20 L418 26 C398 38 372 54 342 58 Z" fill="url(#satinDark)" />
-      {/* main body: gentle wave only at ends, flat center */}
-      <path d="M70 44 C110 36 140 34 210 34 C280 34 310 32 350 26 L350 58 C310 64 280 66 210 66 C140 66 110 68 70 76 Z" fill="url(#satin)" />
-      <path d="M70 44 C110 36 140 34 210 34 C280 34 310 32 350 26 L350 33 C310 39 280 41 210 41 C140 41 110 43 70 51 Z" fill="#fff" opacity=".12" />
-      <text x="210" y="56" textAnchor="middle" className="sash-text">Feliz Círio de Nazaré 2026</text>
+      <g filter="url(#weave)">
+        <path d="M78 46 C58 50 40 66 24 84 L6 98 L30 96 L18 116 C40 100 58 82 82 74 Z" fill="url(#satinDark)" />
+        <path d="M346 30 C368 26 386 14 400 4 L414 6 L402 20 L418 26 C398 38 372 54 342 58 Z" fill="url(#satinDark)" />
+        <path d="M70 44 C110 36 140 34 210 34 C280 34 310 32 350 26 L350 58 C310 64 280 66 210 66 C140 66 110 68 70 76 Z" fill="url(#satin)" />
+      </g>
+      <text x="210" y="55" textAnchor="middle" className="sash-text">Feliz Círio de Nazaré 2026</text>
     </svg>
   );
 }
@@ -151,13 +156,18 @@ const categories = [
   { label: "Imagens Devocionais", page: 6 },
 ];
 
+const photoBg = new Map<string, string>([
+  [pulseiraFe, "#edddc6"], [pulseiraNazinha, "#f6ead2"], [infantil, "#e8dfd0"], [dezenas, "#f3e1cb"],
+  [perola, "#f2e8de"], [amarelo, "#eee1d1"], [vermelho, "#efe6d6"], [imagemGrande, "#f4ecd9"], [imagemPequena, "#f8e5c5"],
+]);
+
 function ProductPage({ product, number }: { product: Product; number: number }) {
   const [selected, setSelected] = useState(0);
   useEffect(() => setSelected(0), [product]);
   return (
     <article className="product-spread">
       <div className="photo-page">
-        <div className="photo-frame"><img src={product.images[selected]} alt={`${product.name} — vista ${selected + 1}`} /></div>
+        <div className="photo-frame" style={{ backgroundColor: photoBg.get(product.images[selected]!) }}><img src={product.images[selected]} alt={`${product.name} — vista ${selected + 1}`} /></div>
         {product.images.length > 1 && <div className="thumbnail-row" aria-label={`Outras vistas de ${product.name}`}>
           {product.images.map((image, index) => (
             <button key={image} type="button" onClick={() => setSelected(index)} className={selected === index ? "thumb active" : "thumb"} aria-label={`Ver imagem ${index + 1}`} aria-pressed={selected === index}>
@@ -227,14 +237,28 @@ function Catalog() {
     const AudioContextClass = window.AudioContext ?? (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!AudioContextClass) return;
     const context = new AudioContextClass();
-    const buffer = context.createBuffer(1, Math.floor(context.sampleRate * 0.12), context.sampleRate);
+    const sr = context.sampleRate; const dur = 0.42;
+    const buffer = context.createBuffer(1, Math.floor(sr * dur), sr);
     const data = buffer.getChannelData(0);
-    for (let i = 0; i < data.length; i += 1) data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
+    let last = 0;
+    for (let i = 0; i < data.length; i += 1) {
+      const t = i / data.length;
+      const env = Math.pow(Math.sin(Math.PI * Math.min(1, t * 1.15)), 1.6) * (1 - t * 0.5);
+      const crackle = Math.random() < 0.004 ? (Math.random() * 2 - 1) * 2.2 : 0;
+      last = last * 0.55 + (Math.random() * 2 - 1) * 0.45;
+      data[i] = (last + crackle) * env;
+    }
     const source = context.createBufferSource();
     const filter = context.createBiquadFilter();
+    const high = context.createBiquadFilter();
     const gain = context.createGain();
-    filter.type = "bandpass"; filter.frequency.value = 1150; gain.gain.value = 0.035;
-    source.buffer = buffer; source.connect(filter); filter.connect(gain); gain.connect(context.destination); source.start();
+    filter.type = "bandpass"; filter.Q.value = 0.7;
+    filter.frequency.setValueAtTime(900, context.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(3200, context.currentTime + dur * 0.55);
+    filter.frequency.exponentialRampToValueAtTime(1400, context.currentTime + dur);
+    high.type = "highpass"; high.frequency.value = 260;
+    gain.gain.value = 0.11;
+    source.buffer = buffer; source.connect(high); high.connect(filter); filter.connect(gain); gain.connect(context.destination); source.start();
     source.onended = () => void context.close();
   }, [soundOn]);
 
