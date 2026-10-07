@@ -156,13 +156,18 @@ const categories = [
   { label: "Imagens Devocionais", page: 6 },
 ];
 
+const photoBg = new Map<string, string>([
+  [pulseiraFe, "#edddc6"], [pulseiraNazinha, "#f6ead2"], [infantil, "#e8dfd0"], [dezenas, "#f3e1cb"],
+  [perola, "#f2e8de"], [amarelo, "#eee1d1"], [vermelho, "#efe6d6"], [imagemGrande, "#f4ecd9"], [imagemPequena, "#f8e5c5"],
+]);
+
 function ProductPage({ product, number }: { product: Product; number: number }) {
   const [selected, setSelected] = useState(0);
   useEffect(() => setSelected(0), [product]);
   return (
     <article className="product-spread">
       <div className="photo-page">
-        <div className="photo-frame"><img className="photo-bg" src={product.images[selected]} alt="" aria-hidden="true" /><img src={product.images[selected]} alt={`${product.name} — vista ${selected + 1}`} /></div>
+        <div className="photo-frame" style={{ backgroundColor: photoBg.get(product.images[selected]!) }}><img src={product.images[selected]} alt={`${product.name} — vista ${selected + 1}`} /></div>
         {product.images.length > 1 && <div className="thumbnail-row" aria-label={`Outras vistas de ${product.name}`}>
           {product.images.map((image, index) => (
             <button key={image} type="button" onClick={() => setSelected(index)} className={selected === index ? "thumb active" : "thumb"} aria-label={`Ver imagem ${index + 1}`} aria-pressed={selected === index}>

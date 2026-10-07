@@ -264,3 +264,4 @@
 .how-art, .how-art img { background: transparent; }
 @media (max-width: 760px) { .cirio-sash { bottom: 128px; } }
 .photo-frame > img.photo-bg { filter: blur(48px) saturate(.25) brightness(1.04); transform: scale(1.4); }
+.photo-frame > img { padding: 0 !important; -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 62%, transparent 100%); }
