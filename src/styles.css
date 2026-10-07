@@ -239,3 +239,16 @@
   .page-arrow-right { right: calc(50% - 56px); left: auto; }
   .catalog-shell { padding-bottom: 40px; }
 }
+
+/* Como funciona: sem bordas/sombra, ilustração ampla */
+.how-section { border-top: 0; }
+.how-photo.how-art { aspect-ratio: auto; box-shadow: none; border: 0; border-radius: 0; overflow: visible; }
+.how-art img { height: auto; object-fit: contain; }
+.how-text .catalog-kicker { color: var(--gold); }
+@media (min-width: 761px) { .how-grid { max-width: 1280px; grid-template-columns: .8fr 1.35fr; gap: clamp(32px, 4vw, 64px); } }
+@media (max-width: 760px) {
+  .how-art { margin: 0 -8px 36px; }
+  .how-grid { gap: 0; }
+  /* Basílica como fundo desde o topo da capa */
+  .basilica-line { top: 64px; bottom: auto; width: 128%; height: 74%; color: color-mix(in oklab, var(--gold) 34%, transparent); }
+}

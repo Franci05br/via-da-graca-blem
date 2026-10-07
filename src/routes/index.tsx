@@ -248,7 +248,7 @@ function Catalog() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const slug = params.get("p");
-    let n = slug ? pageSlugs.indexOf(slug) : Number(params.get("page"));
+    const n = slug ? pageSlugs.indexOf(slug) : Number(params.get("page"));
     if (n > 0 && n < totalPages) setPage(n);
     loaded.current = true;
   }, [totalPages]);
