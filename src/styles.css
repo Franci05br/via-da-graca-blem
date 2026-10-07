@@ -262,3 +262,5 @@
 .photo-frame > img { position: relative; z-index: 1; }
 .photo-frame > img.photo-bg { position: absolute; inset: 0; z-index: 0; object-fit: cover; filter: blur(28px) saturate(.9); transform: scale(1.2); opacity: .95; animation: none; }
 .how-art, .how-art img { background: transparent; }
+@media (max-width: 760px) { .cirio-sash { bottom: 128px; } }
+.photo-frame > img.photo-bg { filter: blur(48px) saturate(.25) brightness(1.04); transform: scale(1.4); }
