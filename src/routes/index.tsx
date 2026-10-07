@@ -87,7 +87,12 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Via da Graça | Catálogo artesanal" },
       { property: "og:description", content: "Folheie a coleção de peças devocionais feitas à mão e consulte pelo WhatsApp." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://via-da-graca-blem.lovable.app/" },
+      { property: "og:image", content: "https://via-da-graca-blem.lovable.app/__l5e/assets-v1/9324ff3a-c4e5-4c49-b9a3-6a0744d9ce50/og-via-da-graca.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://via-da-graca-blem.lovable.app/__l5e/assets-v1/9324ff3a-c4e5-4c49-b9a3-6a0744d9ce50/og-via-da-graca.jpg" },
     ],
   }),
   component: Catalog,
@@ -241,7 +246,9 @@ function Catalog() {
 
   const loaded = useRef(false);
   useEffect(() => {
-    const n = Number(new URLSearchParams(window.location.search).get("page"));
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("p");
+    let n = slug ? pageSlugs.indexOf(slug) : Number(params.get("page"));
     if (n > 0 && n < totalPages) setPage(n);
     loaded.current = true;
   }, [totalPages]);
@@ -249,9 +256,10 @@ function Catalog() {
   useEffect(() => {
     if (!loaded.current) return;
     const url = new URL(window.location.href);
-    if (page === 0) url.searchParams.delete("page"); else url.searchParams.set("page", String(page));
+    url.searchParams.delete("page");
+    if (page === 0) url.searchParams.delete("p"); else url.searchParams.set("p", pageSlugs[page]!);
     window.history.replaceState({}, "", url);
-    document.title = page === 0 ? "Via da Graça — Catálogo" : `${page}/${totalPages - 1} — Via da Graça`;
+    document.title = page === 0 ? "Via da Graça | Catálogo artesanal" : `${page === totalPages - 1 ? "Sobre" : products[page - 1]!.name} — Via da Graça`;
   }, [page, totalPages]);
 
   useEffect(() => {
@@ -329,14 +337,17 @@ const steps = [
   ["03", "Receba em Belém", "Combinamos entrega ou retirada e o pagamento acontece no recebimento."],
 ] as const;
 
+const slugify = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const pageSlugs = ["", ...products.map((p) => slugify(p.name)), "sobre"];
+
 const prayers = [
   ["“O Todo-Poderoso fez em mim grandes coisas, e Santo é o seu nome.”", "Lucas 1,49"],
-  ["“Ó Virgem de Nazaré, Rainha da Amazônia, acolhei sob o vosso manto as nossas famílias.”", "Prece a Nossa Senhora de Nazaré"],
+  ["“Bendita és tu entre as mulheres, e bendito é o fruto do teu ventre.”", "Lucas 1,42"],
   ["“Deixai vir a mim as criancinhas, porque delas é o Reino de Deus.”", "Marcos 10,14"],
   ["“Tudo o que pedirdes na oração, crede que o recebestes, e assim será.”", "Marcos 11,24"],
   ["“Fazei tudo o que ele vos disser.”", "João 2,5"],
   ["“Maria guardava todas estas coisas, meditando-as em seu coração.”", "Lucas 2,19"],
-  ["“À vossa proteção recorremos, Santa Mãe de Deus.”", "Sub tuum praesidium"],
+  ["“Eis aqui a serva do Senhor; faça-se em mim segundo a tua palavra.”", "Lucas 1,38"],
 ] as const;
 
 function PrayerSection({ page }: { page: number }) {
