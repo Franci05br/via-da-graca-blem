@@ -267,7 +267,7 @@
 .photo-frame > img { padding: 0 !important; -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 62%, transparent 100%); }
 @media (max-width: 760px) { .cirio-sash { bottom: 190px; } }
 /* Ajustes finais: fita longe do botão no celular; Como funciona 50% alinhado ao header/footer */
-@media (max-width: 760px) { .cirio-sash { bottom: 28px; width: 200px; } .cover-enter { bottom: 150px; } }
+@media (max-width: 760px) { .cirio-sash { bottom: 110px; width: 200px; } .cover-enter { bottom: 150px; } }
 @media (min-width: 761px) {
   .how-grid { max-width: none; margin: 0; grid-template-columns: 1fr 1fr; padding-left: max(0px, calc((100vw - 1120px) / 2 - 24px)); }
 }
