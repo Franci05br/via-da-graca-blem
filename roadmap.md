@@ -10,3 +10,4 @@
 - [x] Fundo da seção "Da escolha ao encontro" no tom original da capa
 - [x] Seção devocional abaixo das folhas do catálogo (texto único por enquanto)
 - [x] Rodapé verde em todas as páginas do catálogo
+- [x] Remover som de folhear
