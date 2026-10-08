@@ -232,35 +232,7 @@ function Catalog() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
 
-  const paperSound = useCallback(() => {
-    if (!soundOn || typeof window === "undefined") return;
-    const AudioContextClass = window.AudioContext ?? (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-    if (!AudioContextClass) return;
-    const context = new AudioContextClass();
-    const sr = context.sampleRate; const dur = 0.42;
-    const buffer = context.createBuffer(1, Math.floor(sr * dur), sr);
-    const data = buffer.getChannelData(0);
-    let last = 0;
-    for (let i = 0; i < data.length; i += 1) {
-      const t = i / data.length;
-      const env = Math.pow(Math.sin(Math.PI * Math.min(1, t * 1.15)), 1.6) * (1 - t * 0.5);
-      const crackle = Math.random() < 0.004 ? (Math.random() * 2 - 1) * 2.2 : 0;
-      last = last * 0.55 + (Math.random() * 2 - 1) * 0.45;
-      data[i] = (last + crackle) * env;
-    }
-    const source = context.createBufferSource();
-    const filter = context.createBiquadFilter();
-    const high = context.createBiquadFilter();
-    const gain = context.createGain();
-    filter.type = "bandpass"; filter.Q.value = 0.7;
-    filter.frequency.setValueAtTime(900, context.currentTime);
-    filter.frequency.exponentialRampToValueAtTime(3200, context.currentTime + dur * 0.55);
-    filter.frequency.exponentialRampToValueAtTime(1400, context.currentTime + dur);
-    high.type = "highpass"; high.frequency.value = 260;
-    gain.gain.value = 0.11;
-    source.buffer = buffer; source.connect(high); high.connect(filter); filter.connect(gain); gain.connect(context.destination); source.start();
-    source.onended = () => void context.close();
-  }, [soundOn]);
+  const paperSound = useCallback(() => {}, []);
 
   const goTo = useCallback((next: number) => {
     const bounded = Math.max(0, Math.min(totalPages - 1, next));
@@ -318,7 +290,6 @@ function Catalog() {
         <div className="bar-actions">
           <a className="bar-cta hide-sm" href={whatsappUrl("uma peça da coleção")} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Falar com a artesã</span></a>
           <span className="hide-sm">{String(page + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span>
-          <Button variant="ghost" size="icon" onClick={() => setSoundOn((value) => !value)} aria-label={soundOn ? "Desativar som de página" : "Ativar som de página"}>{soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}</Button>
         </div>
       </header>
       {aboutOpen && (
