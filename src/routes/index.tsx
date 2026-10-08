@@ -114,9 +114,9 @@ function BasilicaLineArt() {
   );
 }
 
-function GreenRibbon() {
+function GreenRibbon({ className = "cirio-sash" }: { className?: string }) {
   return (
-    <svg className="cirio-sash" viewBox="0 0 420 120" aria-hidden="true">
+    <svg className={className} viewBox="0 0 420 120" aria-hidden="true">
       <defs>
         <linearGradient id="satin" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="oklch(.46 .1 155)" />
@@ -204,6 +204,7 @@ function Cover({ onEnter }: { onEnter: () => void }) {
           <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={15} /> Consultar coleção</a>
         </div>
         <button type="button" className="cover-enter cover-enter-sm" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
+        <GreenRibbon className="cirio-sash-sm" />
       </div>
       <button type="button" ref={alignToHeaderCta} className="cover-enter cover-enter-lg" onClick={onEnter}>Folhear catálogo <ArrowRight size={15} /></button>
       <p className="cover-instruction">Arraste ou use as setas para folhear</p>
