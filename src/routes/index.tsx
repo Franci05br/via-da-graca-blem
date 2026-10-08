@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Instagram, MessageCircle, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Instagram, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/via-da-graca-logo.svg";
 import corda from "@/assets/corda-fios.png";
@@ -227,7 +227,6 @@ function Catalog() {
   const totalPages = products.length + 2;
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState<"next" | "prev">("next");
-  const [soundOn, setSoundOn] = useState(true);
   const touchStart = useRef<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
